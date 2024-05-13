@@ -7,6 +7,7 @@ export interface IDonor extends Document {
     password: string;
     phoneNumber: string;
     address: string;
+    refreshTokens?: string[];
 }
 
 const DonorSchema = new Schema<IDonor>({
@@ -34,6 +35,10 @@ const DonorSchema = new Schema<IDonor>({
     address: {
          type: String,
           required: true 
+    },
+    refreshTokens: {
+        type: [String],
+        required: false,
     },
 });
 
