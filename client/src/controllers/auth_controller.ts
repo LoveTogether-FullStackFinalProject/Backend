@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
 import { Document } from 'mongoose';
 
-// THE DONOR MODEL IS NOT DEFINED YET
 
 const client = new OAuth2Client();
 const googleSignin = async (req: Request, res: Response) => {
@@ -21,16 +20,15 @@ const googleSignin = async (req: Request, res: Response) => {
         if (email != null) {
             let donor = await Donor.findOne({ 'email': email });
             if (donor == null) {
-                donor = await donor.create(
+                donor = await Donor.create(
                     {
-                        'firstName': payload?.firstName,
-                        'lastName': payload?.lastName,
+                        'firstName': payload?.name,
+                        //'lastName': payload?.lastName,
                         '_id': payload?.sub,
                         'email': email,
-                        'phoneNumber': payload?.phoneNumber,
-                        'address': payload?.address,
+                        //'phoneNumber': payload?.phoneNumber,
+                       // 'address': payload?.address,
                         'password': '0',
-                        'image': payload?.picture
                     });
             }
             const tokens = await generateTokens(donor)
@@ -38,7 +36,7 @@ const googleSignin = async (req: Request, res: Response) => {
                 {
                     email: donor.email,
                     _id: donor._id,
-                    image: donor.image,
+
                     ...tokens,
                 })
         }
@@ -132,8 +130,7 @@ const login = async (req: Request, res: Response) => {
         'email': donor.email, 
         'phoneNumber' :donor.phoneNumber,
         'address': donor.address,
-        'password': donor.encryptedPassword,
-        'image': donor.image,
+        'password': donor.password,
         ...tokens
         });
     } catch (err) {
@@ -149,7 +146,8 @@ const logout = async (req: Request, res: Response) => {
         if (err) return res.sendStatus(401);
         try {
             const donorDb = await Donor.findOne({ '_id': donor._id });
-            if (!donorDb.refreshTokens || !donorDb.refreshTokens.includes(refreshToken)) {
+            if(donorDb!=null){
+            if (!donorDb.refreshTokens||!donorDb.refreshTokens.includes(refreshToken)) {
                 donorDb.refreshTokens = [];
                 await donorDb.save();
                 return res.sendStatus(401);
@@ -159,6 +157,7 @@ const logout = async (req: Request, res: Response) => {
                 console.log("logout success");
                 return res.sendStatus(200);
             }
+        }
         } catch (err) {
             res.sendStatus(401).send(err.message);
         }
