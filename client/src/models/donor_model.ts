@@ -1,4 +1,5 @@
 import { Schema, model, Document } from "mongoose";
+import { IDonation } from './donation_model';
 
 export interface IDonor extends Document {
     firstName: string;
@@ -8,6 +9,8 @@ export interface IDonor extends Document {
     phoneNumber: string;
     address: string;
     refreshTokens?: string[];
+    rating: string;
+    donations: IDonation[];
 }
 
 const DonorSchema = new Schema<IDonor>({
@@ -40,6 +43,7 @@ const DonorSchema = new Schema<IDonor>({
         type: [String],
         required: false,
     },
+
 });
 
 const DonorModel = model<IDonor>("Donor", DonorSchema);
