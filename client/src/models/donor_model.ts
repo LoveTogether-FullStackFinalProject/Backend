@@ -43,7 +43,16 @@ const DonorSchema = new Schema<IDonor>({
         type: [String],
         required: false,
     },
-
+    rating: {
+        type: String,
+        required: true
+    },
+    donations: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Donation', 
+        },
+    ],
 });
 
 const DonorModel = model<IDonor>("Donor", DonorSchema);

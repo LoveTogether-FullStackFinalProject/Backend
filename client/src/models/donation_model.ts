@@ -20,6 +20,7 @@ export interface IDonation {
   description: string;
   pickUpAddress: string;
   donor: Donor;
+  status: string; 
 }
 
 const donationSchema = new mongoose.Schema<IDonation>({
@@ -56,6 +57,11 @@ const donationSchema = new mongoose.Schema<IDonation>({
         ref: "Donor",
         required: true,
     },
+    status: {
+        type: String,
+        required: true,
+    },
+
   
 });
 
