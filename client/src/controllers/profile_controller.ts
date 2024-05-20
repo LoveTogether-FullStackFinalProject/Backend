@@ -32,7 +32,7 @@ class ProfileController {
       }
       const approvalStatus = user.donations.map(donation => ({
         _id: donation._id,
-        status: donation.status,
+        // status: donation.status,
       }));
       res.json(approvalStatus);
     } catch (err) {
