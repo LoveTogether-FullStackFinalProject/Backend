@@ -1,4 +1,4 @@
-import initApp from "../app";
+import initApp from "../App";
 import request from "supertest";
 import mongoose from "mongoose";
 import { Express } from "express";
