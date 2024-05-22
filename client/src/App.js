@@ -1,39 +1,42 @@
 const express = require('express');
-const path = require('path');
-const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-const donorRoutes = require('./routes/donor');
-const adminRoutes = require('./routes/admin');
-const productRoutes = require('./routes/product');
-const authRoutes = require('./routes/auth');
-const profileRoutes = require('./routes/profile');
-const associationRoutes = require('./routes/association');
+const donorRoute = require('./routes/donor_route');
+const adminRoute = require('./routes/admin_route');
+const donationRoute = require('./routes/donation_route');
+const authRoute = require('./routes/auth_route');
+const profileRoute = require('./routes/profile_route');
 const mongoose = require('mongoose');
+const fileRoute = require('./routes/file_route');
 
-mongoose.connect(process.env.DB_URL);
-const db = mongoose.connection;
-db.on("error" , (err) => console.log(err));
-db.once("open", () => console.log("Connected to Database"));
-
+mongoose.connect(process.env.DB_URL,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+mongoose.connection.once("open", () => { console.log("connected to DB") });
 
 const app = express();
+const session = require('express-session');
+app.use(session({
+    secret: 'foo',
+    saveUninitialized: false,
+    resave: false
+}));
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public'));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-
-app.use('/api/donor', donorRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/product', productRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/profile', profileRoutes);
-app.use('/api/association', associationRoutes);
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/donor', donorRoute);
+app.use('/admin', adminRoute);
+app.use('/donation', donationRoute);
+app.use('/auth', authRoute);
+app.use('/file', fileRoute);
+app.use('/profile', profileRoute);
 
 module.exports = app;
