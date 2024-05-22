@@ -38,4 +38,4 @@ app.use('/auth', authRoute);
 app.use('/file', fileRoute);
 app.use('/profile', profileRoute);
 
-module.exports = app;
+export default app;
