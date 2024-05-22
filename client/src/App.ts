@@ -11,7 +11,7 @@ const profileRoute = require('./routes/profile_route');
 const mongoose = require('mongoose');
 const fileRoute = require('./routes/file_route');
 
-mongoose.connect(process.env.DB_URL,
+mongoose.connect(process.env.mongoURL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -21,7 +21,6 @@ mongoose.connection.once("open", () => { console.log("connected to DB") });
 const app = express();
 const session = require('express-session');
 app.use(session({
-    secret: 'foo',
     saveUninitialized: false,
     resave: false
 }));
