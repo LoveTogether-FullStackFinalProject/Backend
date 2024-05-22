@@ -1,6 +1,6 @@
 // donor_test.ts
 import request from "supertest";
-import initApp from "../app";
+import initApp from "../App";
 import mongoose from "mongoose";
 import Donor from "../models/donor_model";
 import { Express } from "express";

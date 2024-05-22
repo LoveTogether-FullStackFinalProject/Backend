@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../app';
+import app from '../App';
 import mongoose from 'mongoose';
 import Donor from '../models/donor_model';
 import Admin from '../models/admin_model';
