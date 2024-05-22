@@ -11,7 +11,7 @@ const profileRoute = require('./routes/profile_route');
 const mongoose = require('mongoose');
 const fileRoute = require('./routes/file_route');
 
-mongoose.connect(process.env.DB_URL,
+mongoose.connect(process.env.mongoURL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
