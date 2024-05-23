@@ -20,7 +20,8 @@ export interface IDonation {
   description: string;
   pickUpAddress: string;
   donor: Donor;
-  status: string; 
+  status: string;
+  approvedByAdmin?: string; 
 }
 
 const donationSchema = new mongoose.Schema<IDonation>({
@@ -60,6 +61,10 @@ const donationSchema = new mongoose.Schema<IDonation>({
     status: {
         type: String,
         required: true,
+    },
+    approvedByAdmin: {
+        type: String,
+        required: false,
     },
 
   
