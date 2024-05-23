@@ -62,10 +62,6 @@ const donationSchema = new mongoose.Schema<IDonation>({
         type: String,
         required: true,
     },
-    approvedByAdmin: {
-        type: String,
-        required: false,
-    },
 
   
 });
