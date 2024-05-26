@@ -20,6 +20,8 @@ export interface IDonation {
   description: string;
   pickUpAddress: string;
   donor: Donor;
+  status: string;
+  approvedByAdmin?: string; 
 }
 
 const donationSchema = new mongoose.Schema<IDonation>({
@@ -55,8 +57,13 @@ const donationSchema = new mongoose.Schema<IDonation>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Donor",
         required: true,
-    }
+    },
+    status: {
+        type: String,
+        required: true,
+    },
 
+  
 });
 
 export const DonationModel = mongoose.model<IDonation>("Donation", donationSchema);

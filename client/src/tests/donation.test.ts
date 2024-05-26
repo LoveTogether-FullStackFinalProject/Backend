@@ -37,6 +37,7 @@ const donation: IDonation = {
   description: 'Assorted canned foods',
   pickUpAddress: '123 Main St',
   donor: '1' as any, // Replace with a valid donor ID
+  status: 'Pending',
 };
 
 const newDonation: IDonation = {
@@ -49,6 +50,7 @@ const newDonation: IDonation = {
   description: 'Gently used shirts',
   pickUpAddress: '456 Oak Ave',
   donor: '2' as any, // Replace with a valid donor ID
+  status: 'Pending',
 };
 beforeAll(async () => {
     // app = await initApp();
