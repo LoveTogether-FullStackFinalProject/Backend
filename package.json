@@ -8,7 +8,9 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
+    "tsc": "^2.0.4",
+    "typescript": "^5.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -20,7 +22,6 @@
     "testAdmin": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/admin.test.ts",
     "testDonor": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/donor.test.ts",
     "testFile": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/file.test.ts"
-    
   },
   "eslintConfig": {
     "extends": [
