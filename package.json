@@ -12,7 +12,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "tsc && nodemon ./dist/src/server.js",
     "test": "tsc && jest --coverage --detectOpenHandles --forceExit",
     "test-prd": "tsc && cross-env NODE_ENV=production DOTENV_CONFIG_PATH='./.env.prod' jest --coverage --detectOpenHandles --forceExit",
     "testAuth": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/auth.test.ts",
