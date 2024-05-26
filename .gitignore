@@ -7,7 +7,7 @@ build/
 *.log
 
 # Environment variables
-.env
+
 
 # IDE/editor specific files
 .vscode/
