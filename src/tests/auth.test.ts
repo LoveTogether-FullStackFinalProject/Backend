@@ -3,6 +3,7 @@ import App from "../App";
 import mongoose from "mongoose";
 import { Express } from "express";
 import Donor from "../models/donor_model";
+import initApp from "../App";
 //THE DONOR MODEL IS NOT DEFINED YET
 
 let app: Express;
@@ -18,8 +19,8 @@ const donor = {
 
 beforeAll(async () => {
     process.env.JWT_EXPIRATION = '3s'
-    app=App;
-    //app = await initApp();
+    // app=App;
+    app = await initApp();
     console.log("beforeAll");
     await Donor.deleteMany({ 'email': donor.email });
 });
