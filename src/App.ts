@@ -1,46 +1,63 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+import env from "dotenv";
+env.config();
+import express, { Express } from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import AdminRoute from "./routes/admin_route";
+import AuthRoute from "./routes/auth_route";
+import DonationRoute from "./routes/donation_route";
+import DonorRoute from "./routes/donor_route";
+import FileRoute from "./routes/file_route";
+import ProfileRoute from "./routes/profile_route";
+import swaggerUI from "swagger-ui-express"
+import swaggerJsDoc from "swagger-jsdoc"
 
+const initApp = (): Promise<Express> => {
+  const promise = new Promise<Express>((resolve) => {
+    const db = mongoose.connection;
+    db.once("open", () => console.log("Connected to Database"));
+    db.on("error", (error) => console.error(error));
+    const url = process.env.DB_URL;
+    mongoose.connect(url!).then(() => {
+      const app = express();
+      app.use(bodyParser.json());
+      app.use(bodyParser.urlencoded({ extended: true }));
+      app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "");
+        res.header("Access-Control-Allow-Methods", "");
+        res.header("Access-Control-Allow-Headers", "");
+        next();
+      })
+      const options = {
+        definition: {
+          openapi: "3.0.0",
+          info: {
+            title: "Vehahavtem Together 2024",
+            version: "1.0.1",
+            description: "Full Stack Project 2024",
+          },
+        //   servers: [{ url: "https://node12.cs.colman.ac.il/", },],
+        },
+        apis: ["./src/routes/.ts"],
+      };
+      const specs = swaggerJsDoc(options);
+      app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-
-
-const donorRoute = require('./routes/donor_route');
-const adminRoute = require('./routes/admin_route');
-const donationRoute = require('./routes/donation_route');
-const authRoute = require('./routes/auth_route');
-const profileRoute = require('./routes/profile_route');
-const mongoose = require('mongoose');
-const fileRoute = require('./routes/file_route');
-
-mongoose.connect(process.env.mongoURL,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
+      app.use("/admin", AdminRoute);
+      app.use("/auth", AuthRoute);
+      app.use("/donation", DonationRoute);
+      app.use("/donor", DonorRoute);
+      app.use("/file", FileRoute);
+      app.use("/profile", ProfileRoute);
+      app.use("/public", express.static("public"));
+    //   app.use(express.static('dist/client'))
+    //   app.get('*',function (req, res) {
+    //     res.sendfile('dist/client/index.html')
+    //   });
+       resolve(app);
     });
-mongoose.connection.once("open", () => { console.log("connected to DB") });
+  });
+  return promise;
+};
 
-const app = express();
-const session = require('express-session');
-app.use(session({
-    secret: "fbb866cf21c7d5b59f4598a9157171af6f9769806d4e0590ade0da2d5ee76c41e0abbd92082248c573f088f3647f4707c4389526adf1a07e14b9e684aad6423b",
-    resave: false,
-    saveUninitialized: true
-}));
-
-app.use(express.static('public'));
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors());
-app.use('/donor', donorRoute);
-app.use('/admin', adminRoute);
-app.use('/donation', donationRoute);
-app.use('/auth', authRoute);
-app.use('/file', fileRoute);
-app.use('/profile', profileRoute);
-
-
-export default app;
+export default initApp;
