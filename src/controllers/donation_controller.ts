@@ -10,7 +10,7 @@ const getAllDonations = async (
     ): Promise<void> => {
     try {
         const donations = await Donation.find();
-        res.status(200).send({ donations });
+        res.status(200).send( donations );
     } catch (error) {
         res.status(500).send({ message: "Error fetching all donations" });
     }
