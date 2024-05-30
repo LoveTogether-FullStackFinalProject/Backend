@@ -11,6 +11,7 @@ import FileRoute from "./routes/file_route";
 import ProfileRoute from "./routes/profile_route";
 import swaggerUI from "swagger-ui-express"
 import swaggerJsDoc from "swagger-jsdoc"
+import cors from "cors";
 
 const initApp = (): Promise<Express> => {
   const promise = new Promise<Express>((resolve) => {
@@ -20,14 +21,29 @@ const initApp = (): Promise<Express> => {
     const url = process.env.DB_URL;
     mongoose.connect(url!).then(() => {
       const app = express();
+      //app.use(cors());
+      //app.use(cors({ origin: 'http://localhost:5173' }));
+     //app.use(cors({ origin: '*' }));
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({ extended: true }));
+      // app.use((req, res, next) => {
+      //   res.setHeader('Access-Control-Allow-Origin', '*');
+      //   res.setHeader('Access-Control-Allow-Methods', '*');
+      //   res.setHeader('Access-Control-Allow-Headers', '*');
+      //   next();
+      // });
       app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "");
-        res.header("Access-Control-Allow-Methods", "");
-        res.header("Access-Control-Allow-Headers", "");
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "*");
+        res.header("Access-Control-Allow-Headers", "*");
         next();
       })
+      // app.use((req, res, next) => {
+      //   res.header("Access-Control-Allow-Origin", "*");
+      //   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+      //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      //   next();
+      // })
       const options = {
         definition: {
           openapi: "3.0.0",
