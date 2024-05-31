@@ -23,10 +23,6 @@ const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
         type: Number,
         required: true,
     },
-    itemCondition: {
-        type: String,
-        required: true,
-    },
     description: {
         type: String,
         required: true,
