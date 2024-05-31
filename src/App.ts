@@ -8,7 +8,6 @@ import AuthRoute from "./routes/auth_route";
 import DonationRoute from "./routes/donation_route";
 import DonorRoute from "./routes/donor_route";
 import FileRoute from "./routes/file_route";
-import ProfileRoute from "./routes/profile_route";
 import swaggerUI from "swagger-ui-express"
 import swaggerJsDoc from "swagger-jsdoc"
 import cors from "cors";
@@ -64,7 +63,6 @@ const initApp = (): Promise<Express> => {
       app.use("/donation", DonationRoute);
       app.use("/donor", DonorRoute);
       app.use("/file", FileRoute);
-      app.use("/profile", ProfileRoute);
       app.use("/public", express.static("public"));
     //   app.use(express.static('dist/client'))
     //   app.get('*',function (req, res) {
