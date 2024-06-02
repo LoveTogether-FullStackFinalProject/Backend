@@ -58,22 +58,20 @@ const getAllDonations = async (
         res.status(500).send({ message: "Error updating donation" });
     }};
 
-    const deleteDonation = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findByIdAndDelete(id);
-        if (!donation) {
+    const deleteDonation = async (req: Request, res: Response): Promise<void> => {
+        try {
+          const { id } = req.params;
+          const donation = await Donation.findByIdAndDelete(id);
+          if (!donation) {
             res.status(404).send("Donation not found");
             return;
+          }
+          res.status(204).send();
+        } catch (error) {
+          res.status(500).send({ message: "Error deleting donation" });
         }
-        res.status(204).send();
-    } catch (error) {
-        res.status(500).send({ message: "Error deleting donation" });
-    }
-    };
+      };
+      
 
 
     export default {
