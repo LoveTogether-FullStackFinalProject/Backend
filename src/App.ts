@@ -44,6 +44,12 @@ const initApp = (): Promise<Express> => {
       //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
       //   next();
       // })
+      
+      app.use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+      }));
       const options = {
         definition: {
           openapi: "3.0.0",
