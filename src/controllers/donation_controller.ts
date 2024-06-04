@@ -48,15 +48,18 @@ const getAllDonations = async (
     };
 
     const updateDonation = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findByIdAndUpdate(id, req.body  , { new: true });
-        if (!donation) {
+        try {
+          const { id } = req.params;
+          const donation = await Donation.findByIdAndUpdate(id, req.body, { new: true });
+          if (!donation) {
             res.status(404).send("Donation not found");
             return;
-        }   } catch (error) {
-        res.status(500).send({ message: "Error updating donation" });
-    }};
+          }
+          res.status(200).json(donation);
+        } catch (error) {
+          res.status(500).send({ message: "Error updating donation" });
+        }
+      };
 
     const deleteDonation = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -65,14 +68,12 @@ const getAllDonations = async (
           if (!donation) {
             res.status(404).send("Donation not found");
             return;
-          }
+          } 
           res.status(204).send();
         } catch (error) {
           res.status(500).send({ message: "Error deleting donation" });
         }
       };
-      
-
 
     export default {
     getAllDonations,
