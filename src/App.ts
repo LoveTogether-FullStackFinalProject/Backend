@@ -89,7 +89,7 @@ import AuthRoute from "./routes/auth_route";
 import DonationRoute from "./routes/donation_route";
 import DonorRoute from "./routes/donor_route";
 import FileRoute from "./routes/file_route";
-import ProfileRoute from "./routes/profile_route";
+import requestedDonationRoute from "./routes/requestedDonation_route";
 import swaggerUI from "swagger-ui-express"
 import swaggerJsDoc from "swagger-jsdoc"
 import cors from "cors";
@@ -107,8 +107,19 @@ const initApp = (): Promise<Express> => {
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use((req, res, next) => {
         next();
-      });
-
+      })
+      // app.use((req, res, next) => {
+      //   res.header("Access-Control-Allow-Origin", "*");
+      //   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+      //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      //   next();
+      // })
+      
+      app.use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+      }));
       const options = {
         definition: {
           openapi: "3.0.0",
@@ -129,7 +140,8 @@ const initApp = (): Promise<Express> => {
       app.use("/donation", DonationRoute);
       app.use("/donor", DonorRoute);
       app.use("/file", FileRoute);
-      app.use("/profile", ProfileRoute);
+      app.use("/requestedDonation", requestedDonationRoute);
+      
       app.use("/public", express.static("public"));
        resolve(app);
     });

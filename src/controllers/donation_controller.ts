@@ -10,7 +10,7 @@ const getAllDonations = async (
     ): Promise<void> => {
     try {
         const donations = await Donation.find();
-        res.status(200).send({ donations });
+        res.status(200).send( donations );
     } catch (error) {
         res.status(500).send({ message: "Error fetching all donations" });
     }
@@ -48,33 +48,32 @@ const getAllDonations = async (
     };
 
     const updateDonation = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findByIdAndUpdate(id, req.body  , { new: true });
-        if (!donation) {
+        try {
+          const { id } = req.params;
+          const donation = await Donation.findByIdAndUpdate(id, req.body, { new: true });
+          if (!donation) {
             res.status(404).send("Donation not found");
             return;
-        }   } catch (error) {
-        res.status(500).send({ message: "Error updating donation" });
-    }};
-
-    const deleteDonation = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findByIdAndDelete(id);
-        if (!donation) {
-            res.status(404).send("Donation not found");
-            return;
+          }
+          res.status(200).json(donation);
+        } catch (error) {
+          res.status(500).send({ message: "Error updating donation" });
         }
-        res.status(204).send();
-    } catch (error) {
-        res.status(500).send({ message: "Error deleting donation" });
-    }
-    };
+      };
 
+    const deleteDonation = async (req: Request, res: Response): Promise<void> => {
+        try {
+          const { id } = req.params;
+          const donation = await Donation.findByIdAndDelete(id);
+          if (!donation) {
+            res.status(404).send("Donation not found");
+            return;
+          } 
+          res.status(204).send();
+        } catch (error) {
+          res.status(500).send({ message: "Error deleting donation" });
+        }
+      };
 
     export default {
     getAllDonations,

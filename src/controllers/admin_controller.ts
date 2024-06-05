@@ -91,7 +91,7 @@ const getAllDonations = async (
     ): Promise<void> => {
     try {
         const donations = await Donation.find();
-        res.status(200).send({ donations });
+        res.status(200).send( donations );
     } catch (error) {
         res.status(500).send({ message: "Error fetching all donations" });
     }
@@ -168,7 +168,7 @@ const updateDonation = async (req: Request, res: Response): Promise<void> => {
         ): Promise<void> => {
         try {
             const donations = await Donation.find({status: "Available"});
-            res.status(200).send({ donations });
+            res.status(200).send( donations );
         } catch (error) {
             res.status(500).send({ message: "Error fetching all available donations" });
         }
