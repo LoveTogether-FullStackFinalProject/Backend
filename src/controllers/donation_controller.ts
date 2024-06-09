@@ -75,6 +75,19 @@ const getAllDonations = async (
     }
     };
 
+    const uploadDonation = async (
+    req: Request,
+    res: Response
+    ): Promise<void> => {
+    try {
+        const donation = new Donation(req.body);
+        await donation.save();
+        res.status(201).send(donation);
+    } catch (error) {
+        res.status(500).send({ message: "Error uploading donation" });
+    }
+    };
+
 
     export default {
     getAllDonations,
@@ -82,5 +95,6 @@ const getAllDonations = async (
     createDonation,
     updateDonation,
     deleteDonation,
+    uploadDonation,
     };
     

@@ -9,6 +9,6 @@ router.get("/donation/:id",DonationController.getDonationById);
 router.post("/donation",DonationController.createDonation);
 router.put("/donation/update/:id",DonationController.updateDonation);
 router.delete("/donation/delete/:id",DonationController.deleteDonation);
-
+router.post('/upload', DonationController.uploadDonation);
 
 export default router;
