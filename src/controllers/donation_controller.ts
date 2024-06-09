@@ -81,7 +81,7 @@ const getAllDonations = async (
     ): Promise<void> => {
     const donation = await Donation.create(req.body);
         try {
-        await donation.save();
+        // await donation.save();
         console.log("Donation is: " + donation)
         res.status(201).send(donation);
     } catch (error) {
