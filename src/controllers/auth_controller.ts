@@ -64,11 +64,10 @@ const generateTokens = async (donor: Document & IDonor) => {
 const register = async (req: Request, res: Response) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const id = req.body._id;
     const email = req.body.email;
-    const phoneNumber = req.body.phoneNumber;
-    const address = req.body.address; 
     const password = req.body.password;
+    const phoneNumber = req.body.phoneNumber;
+    const mainAddress = req.body.address; 
     const image = req.body.image;
     if (!email || !password) {
         return res.status(400).send("missing email or password");
@@ -83,21 +82,19 @@ const register = async (req: Request, res: Response) => {
         const rs2 = await Donor.create({
         'firstName': firstName,
         'lastName':lastName,
-        '_id':id,
         'image': image,
         'email': email, 
         'phoneNumber' :phoneNumber,
-        'address': address,
+        'address': mainAddress,
         'password': encryptedPassword });
 
         const tokens = await generateTokens(rs2)
         return res.status(201).send({
         'firstName': firstName,
         'lastName':lastName,
-        '_id':id,
         'email': email, 
         'phoneNumber' :phoneNumber,
-        'address': address,
+        'address': mainAddress,
         'password': encryptedPassword,
         'image': image,
         ...tokens
@@ -126,10 +123,9 @@ const login = async (req: Request, res: Response) => {
         return res.status(200).send({
         'firstName': donor.firstName,
         'lastName':donor.lastName,
-        '_id':donor.id,
         'email': donor.email, 
         'phoneNumber' :donor.phoneNumber,
-        'address': donor.address,
+        'address': donor.mainAddress,
         'password': donor.password,
         ...tokens
         });
