@@ -22,6 +22,7 @@ export interface IDonation {
   donor: Donor;
   status: string;
   approvedByAdmin?: string; 
+  image: string;
 }
 
 const donationSchema = new mongoose.Schema<IDonation>({
@@ -61,6 +62,10 @@ const donationSchema = new mongoose.Schema<IDonation>({
     status: {
         type: String,
         required: true,
+    },
+    image: {
+        type: String,
+        required: false,
     },
 
   
