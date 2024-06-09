@@ -38,6 +38,7 @@ const donation: IDonation = {
   pickUpAddress: '123 Main St',
   donor: '1' as any, // Replace with a valid donor ID
   status: 'Pending',
+  image: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
 };
 
 const newDonation: IDonation = {
@@ -51,6 +52,7 @@ const newDonation: IDonation = {
   pickUpAddress: '456 Oak Ave',
   donor: '2' as any, // Replace with a valid donor ID
   status: 'Pending',
+  image: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
 };
 beforeAll(async () => {
     // app = await initApp();

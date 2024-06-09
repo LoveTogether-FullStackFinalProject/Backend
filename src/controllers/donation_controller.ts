@@ -33,19 +33,19 @@ const getAllDonations = async (
     }
     };
 
-    const createDonation = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
-    try {
-        const donation = new Donation(req.body);
-        await donation.save();
-        res.status(201)
-        .send(donation)
-    } catch (error) {
-        res.status(500).send({ message: "Error creating donation" });
-    }
-    };
+    // const createDonation = async (
+    // req: Request,
+    // res: Response
+    // ): Promise<void> => {
+    // try {
+    //     const donation = new Donation(req.body);
+    //     await donation.save();
+    //     res.status(201)
+    //     .send(donation)
+    // } catch (error) {
+    //     res.status(500).send({ message: "Error creating donation" });
+    // }
+    // };
 
     const updateDonation = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -79,11 +79,13 @@ const getAllDonations = async (
     req: Request,
     res: Response
     ): Promise<void> => {
-    try {
-        const donation = new Donation(req.body);
+    const donation = await Donation.create(req.body);
+        try {
         await donation.save();
+        console.log("Donation is: " + donation)
         res.status(201).send(donation);
     } catch (error) {
+        console.log("Donation is: " + req.body)
         res.status(500).send({ message: "Error uploading donation" });
     }
     };
@@ -92,7 +94,7 @@ const getAllDonations = async (
     export default {
     getAllDonations,
     getDonationById,
-    createDonation,
+    // createDonation,
     updateDonation,
     deleteDonation,
     uploadDonation,
