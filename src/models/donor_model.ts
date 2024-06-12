@@ -7,7 +7,7 @@ export interface IDonor extends Document {
     email: string;
     password: string;
     phoneNumber: string;
-    address: string;
+    mainAddress: string;
     refreshTokens?: string[];
     rating: string;
     donations: IDonation[];
@@ -35,7 +35,7 @@ const DonorSchema = new Schema<IDonor>({
          type: String,
           required: true
      },
-    address: {
+    mainAddress: {
          type: String,
           required: true 
     },
@@ -45,7 +45,7 @@ const DonorSchema = new Schema<IDonor>({
     },
     rating: {
         type: String,
-        required: true
+        required: false
     },
     donations: [
         {

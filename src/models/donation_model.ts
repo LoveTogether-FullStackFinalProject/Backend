@@ -11,56 +11,62 @@ export interface Donor {
 }
 
 export interface IDonation {
-  _id: string;
-  category: string;
-  productType: string; 
-  amount: number;
-  itemCondition: string;
-  expirationDate: Date;
-  description: string;
-  pickUpAddress: string;
-  donor: Donor;
-  status: string;
-  approvedByAdmin?: string; 
+//   _id: string;
+//   category: string;
+//   productType: string; 
+//   amount: number;
+//   itemCondition: string;
+//   expirationDate: Date;
+//   description: string;
+//   pickUpAddress: string;
+//   donor: Donor;
+//   status: string;
+//   approvedByAdmin?: string; 
+//   image: string;
+
+itemName: string;
+quantity: number;
+category: string;
+condition: string;
+expirationDate: string;
+description: string;
+pickupAddress: string;
+image: string;
+
 }
 
 const donationSchema = new mongoose.Schema<IDonation>({
-    category: {
-        type: String,
-        required: true,
-    },
-    productType: {
-        type: String,
-        required: true,
-    },
-    amount: {
-        type: Number,
-        required: true,
-    },
-    itemCondition: {
-        type: String,
-        required: true,
-    },
-    expirationDate: {
-        type: Date,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    pickUpAddress: {
+    itemName: {
         type: String,
         required: false,
     },
-    donor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Donor",
-        required: true,
+    quantity: {
+        type: Number,
+        required: false,
     },
-    status: {
+    category: {
         type: String,
-        required: true,
+        required: false,
+    },
+    condition: {
+        type: String,
+        required: false,
+    },
+    expirationDate: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    pickupAddress: {
+        type: String,
+        required: false,
+    },
+    image: {
+        type: String,
+        required: false,
     },
 
   

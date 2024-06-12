@@ -8,7 +8,7 @@ import AuthRoute from "./routes/auth_route";
 import DonationRoute from "./routes/donation_route";
 import DonorRoute from "./routes/donor_route";
 import FileRoute from "./routes/file_route";
-import ProfileRoute from "./routes/profile_route";
+import requestedDonationRoute from "./routes/requestedDonation_route";
 import swaggerUI from "swagger-ui-express"
 import swaggerJsDoc from "swagger-jsdoc"
 import cors from "cors";
@@ -58,15 +58,20 @@ const initApp = (): Promise<Express> => {
       };
       const specs = swaggerJsDoc(options);
       app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
-
+      app.use(cors({
+        origin: 'http://localhost:5173', 
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
+    }));
       app.use("/admin", AdminRoute);
       app.use("/auth", AuthRoute);
       app.use("/donation", DonationRoute);
       app.use("/donor", DonorRoute);
-      app.use("/file", FileRoute);
-      app.use("/profile", ProfileRoute);
-      app.use("/public", express.static("public"));
-    //   app.use(express.static('dist/client'))
+      app.use('/photos', FileRoute); 
+      app.use("/requestedDonation", requestedDonationRoute);
+      
+      app.use('/public', express.static('public'));
+      //   app.use(express.static('dist/client'))
     //   app.get('*',function (req, res) {
     //     res.sendfile('dist/client/index.html')
     //   });
