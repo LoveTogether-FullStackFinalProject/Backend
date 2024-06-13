@@ -19,6 +19,16 @@ const getAllUsers = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const getAdmin = async (req: Request, res: Response): Promise<void> => {
+  const customReq = req as CustomRequest;
+  try {
+    const admin = await Admin.find();
+    res.status(200).send( admin[0] );
+  } catch (error) {
+    res.status(500).send({ message: "Error fetching admin" });
+  }
+}; 
+
 const getUserById = async (req: Request, res: Response): Promise<void> => {
   const customReq = req as CustomRequest;
   try {
@@ -184,6 +194,7 @@ const updateDonation = async (req: Request, res: Response): Promise<void> => {
 
   export default {
   getAllUsers,
+  getAdmin,
   getUserById,
   updateUser,
   deleteUser,
