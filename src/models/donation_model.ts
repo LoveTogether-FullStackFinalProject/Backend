@@ -32,6 +32,8 @@ expirationDate: string;
 description: string;
 pickupAddress: string;
 image: string;
+donor: IDonor | mongoose.Types.ObjectId;
+
 
 }
 
@@ -68,8 +70,11 @@ const donationSchema = new mongoose.Schema<IDonation>({
         type: String,
         required: false,
     },
-
-  
+    donor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Donor',
+        required: true,
+    },
 });
 
 export const DonationModel = mongoose.model<IDonation>("Donation", donationSchema);
