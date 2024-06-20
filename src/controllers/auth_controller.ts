@@ -62,47 +62,42 @@ const generateTokens = async (donor: Document & IDonor) => {
 }
 
 const register = async (req: Request, res: Response) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const password = req.body.password;
-    const phoneNumber = req.body.phoneNumber;
-    const mainAddress = req.body.address; 
-    const image = req.body.image;
-    if (!email || !password) {
-        return res.status(400).send("missing email or password");
-    }
-    try { 
-        const rs = await Donor.findOne({ 'email': email });
-        if (rs != null) {
-            return res.status(406).send("email already exists");
-        }
-        const salt = await bcrypt.genSalt(10);
-        const encryptedPassword = await bcrypt.hash(password, salt);
-        const rs2 = await Donor.create({
-        'firstName': firstName,
-        'lastName':lastName,
-        'image': image,
-        'email': email, 
-        'phoneNumber' :phoneNumber,
-        'address': mainAddress,
-        'password': encryptedPassword });
+  const { firstName, lastName, email, password, phoneNumber, mainAddress, image } = req.body;
+  if (!email || !password) {
+      return res.status(400).send("missing email or password");
+  }
+  try {
+      const existingDonor = await Donor.findOne({ 'email': email });
+      if (existingDonor) {
+          return res.status(406).send("email already exists");
+      }
+      const salt = await bcrypt.genSalt(10);
+      const encryptedPassword = await bcrypt.hash(password, salt);
+      const newDonor = await Donor.create({
+          firstName,
+          lastName,
+          email,
+          password: encryptedPassword,
+          phoneNumber,
+          mainAddress,
+          image
+      });
 
-        const tokens = await generateTokens(rs2)
-        return res.status(201).send({
-        'firstName': firstName,
-        'lastName':lastName,
-        'email': email, 
-        'phoneNumber' :phoneNumber,
-        'address': mainAddress,
-        'password': encryptedPassword,
-        'image': image,
-        ...tokens
-        });
-    } catch (err) {
-        return res.status(400).send(err);
-    }
-}
+      const tokens = await generateTokens(newDonor);
+      return res.status(201).send({
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          mainAddress,
+          image,
+          ...tokens
+      });
+  } catch (err) {
+      return res.status(400).send(err);
+  }
+};
+
 
 const login = async (req: Request, res: Response) => {
     const email = req.body.email;
