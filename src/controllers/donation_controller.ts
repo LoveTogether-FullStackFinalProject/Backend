@@ -1,39 +1,44 @@
-import e, { Request, Response } from "express";
-import Donation from "../models/donation_model";
+import { Request, Response } from 'express';
+import Donation from '../models/donation_model';
 
+const getAllDonations = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const donations = await Donation.find().populate('donor');
+    res.status(200).send(donations);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching all donations' });
+  }
+};
 
-
-
-const getAllDonations = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
-    try {
-        const donations = await Donation.find();
-        res.status(200).send( donations );
-    } catch (error) {
-        res.status(500).send({ message: "Error fetching all donations" });
+const getDonationById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const donation = await Donation.findById(id).populate('donor');
+    if (!donation) {
+      res.status(404).send('Donation not found');
+      return;
     }
-    };
+    res.status(200).json(donation);
+  } catch (err) {
+    res.status(500).send('Internal Server Error -> getDonationById');
+  }
+};
 
-    const getDonationById = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findById(id);
-        if (!donation) {
-            res.status(404).send("Donation not found");
-            return;
-        }
-        res.status(200).json(donation);
-    } catch (err) {
-        res.status(500).send("Internal Server Error -> getDonationById");
+const updateDonation = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const donation = await Donation.findByIdAndUpdate(id, req.body, { new: true }).populate('donor');
+    if (!donation) {
+      res.status(404).json({ message: 'Donation not found' });
+      return;
     }
-    };
+    res.status(200).json(donation);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating donation' });
+  }
+};
 
-    // const createDonation = async (
+  // const createDonation = async (
     // req: Request,
     // res: Response
     // ): Promise<void> => {
@@ -47,56 +52,49 @@ const getAllDonations = async (
     // }
     // };
 
-    const updateDonation = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findByIdAndUpdate(id, req.body  , { new: true });
-        if (!donation) {
-            res.status(404).send("Donation not found");
-            return;
-        }   } catch (error) {
-        res.status(500).send({ message: "Error updating donation" });
-    }};
-
-    const deleteDonation = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
-    try {
-        const { id } = req.params;
-        const donation = await Donation.findByIdAndDelete(id);
-        if (!donation) {
-            res.status(404).send("Donation not found");
-            return;
-        }
-        res.status(204).send();
-    } catch (error) {
-        res.status(500).send({ message: "Error deleting donation" });
+const deleteDonation = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const result = await Donation.findByIdAndDelete(id);
+    if (!result) {
+      console.log(`Donation not found: ${id}`);
     }
-    };
+    console.log(`Donation deleted: ${id}`);
+    res.status(200).send('Donation deleted successfully');
+  } catch (error) {
+    console.error('Error deleting donation:', error);
+    res.status(500).send('Error deleting donation');
+  }
+};
 
-    const uploadDonation = async (
-    req: Request,
-    res: Response
-    ): Promise<void> => {
+const uploadDonation = async (req: Request, res: Response): Promise<void> => {
+  try {
     const donation = await Donation.create(req.body);
-        try {
-        // await donation.save();
-        console.log("Donation is: " + donation)
-        res.status(201).send(donation);
-    } catch (error) {
-        console.log("Donation is: " + req.body)
-        res.status(500).send({ message: "Error uploading donation" });
+    res.status(201).send(donation);
+  } catch (error) {
+    res.status(500).send({ message: 'Error uploading donation' });
+  }
+};
+
+const getDonationsByUserId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const donations = await Donation.find({ 'donor._id': userId });
+    if (donations.length === 0) {
+      res.status(404).send('No donations found for this user');
+      return;
     }
-    };
-
-
-    export default {
-    getAllDonations,
-    getDonationById,
-    // createDonation,
-    updateDonation,
-    deleteDonation,
-    uploadDonation,
-    };
-    
+    res.status(200).send(donations);
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching donations for user' });
+  }
+};
+  
+export default {
+  getAllDonations,
+  getDonationsByUserId,
+  getDonationById,
+  updateDonation,
+  deleteDonation,
+  uploadDonation,
+};
