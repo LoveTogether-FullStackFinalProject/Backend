@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Donation from '../models/donation_model';
+import mongoose from "mongoose";
 
 const getAllDonations = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -76,19 +77,31 @@ const uploadDonation = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+
 const getDonationsByUserId = async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.params;
-    const donations = await Donation.find({ 'donor._id': userId });
+    console.log(`Fetching donations for userId: ${userId}`); // Verify userId
+
+    if (!userId) {
+      res.status(400).send('User ID is required');
+      return;
+    }
+
+    const donations = await Donation.find({ donor: new mongoose.Types.ObjectId(userId) }).populate('donor');
+    
     if (donations.length === 0) {
+      console.log('No donations found for this user');
       res.status(404).send('No donations found for this user');
       return;
     }
     res.status(200).send(donations);
   } catch (error) {
+    console.error('Error fetching donations for user:', error);
     res.status(500).send({ message: 'Error fetching donations for user' });
   }
 };
+
   
 export default {
   getAllDonations,

@@ -8,6 +8,6 @@ router.get('/donation/:id', DonationController.getDonationById);
 router.put('/update/:id', DonationController.updateDonation);
 router.delete('/delete/:id', DonationController.deleteDonation);
 router.post('/upload', DonationController.uploadDonation);
-router.get('/user/:id', DonationController.getDonationsByUserId);
+router.get('/user/:userId', DonationController.getDonationsByUserId);
 
 export default router;
