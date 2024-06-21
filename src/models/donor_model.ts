@@ -9,8 +9,7 @@ export interface IDonor extends Document {
     phoneNumber: string;
     mainAddress: string;
     refreshTokens?: string[];
-    rating: string;
-    donations: IDonation[];
+    rating?: string;
 }
 
 const DonorSchema = new Schema<IDonor>({
@@ -47,12 +46,6 @@ const DonorSchema = new Schema<IDonor>({
         type: String,
         required: false
     },
-    donations: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Donation', 
-        },
-    ],
 });
 
 const DonorModel = model<IDonor>("Donor", DonorSchema);
