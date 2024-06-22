@@ -52,12 +52,14 @@ const initApp = (): Promise<Express> => {
             version: "1.0.1",
             description: "Full Stack Project 2024",
           },
+          servers: [{ url: "http://localhost:3000", },],
         //   servers: [{ url: "https://node12.cs.colman.ac.il/", },],
         },
-        apis: ["./src/routes/.ts"],
+        apis: ["./src/routes/*.ts"],
       };
       const specs = swaggerJsDoc(options);
       app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+
       app.use(cors({
         origin: 'http://localhost:5173', 
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

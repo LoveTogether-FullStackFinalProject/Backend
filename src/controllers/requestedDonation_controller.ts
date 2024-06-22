@@ -10,7 +10,7 @@ const getAllrequestedDonations = async (
         const rdonations = await requestedDonation.find();
         res.status(200).send( rdonations );
     } catch (error) {
-        res.status(500).send({ message: "Error fetching all donations" });
+        res.status(500).send({ message: "Error fetching all requested donations" });
     }
     };
 
@@ -22,12 +22,12 @@ const getAllrequestedDonations = async (
         const { id } = req.params;
         const rdonation = await requestedDonation.findById(id);
         if (!rdonation) {
-            res.status(404).send("Donation not found");
+            res.status(404).send("requested donation not found");
             return;
         }
         res.status(200).json(rdonation);
     } catch (err) {
-        res.status(500).send("Internal Server Error -> getDonationById");
+        res.status(500).send("Internal Server Error -> get requested DonationById");
     }
     };
 
@@ -41,7 +41,7 @@ const getAllrequestedDonations = async (
         res.status(201)
         .send(rdonation)
     } catch (error) {
-        res.status(500).send({ message: "Error creating donation" });
+        res.status(500).send({ message: "Error creating requested donation" });
     }
     };
 
@@ -52,8 +52,10 @@ const getAllrequestedDonations = async (
         if (!rdonation) {
             res.status(404).send("Donation not found");
             return;
-        }   } catch (error) {
-        res.status(500).send({ message: "Error updating donation" });
+        }   
+    res.status(200).json(rdonation);
+     } catch (error) {
+        res.status(500).send({ message: "Error updating requested donation" });
     }};
 
     const deleteRequestedDonation = async (
@@ -64,12 +66,12 @@ const getAllrequestedDonations = async (
         const { id } = req.params;
         const rdonation = await requestedDonation.findByIdAndDelete(id);
         if (!rdonation) {
-            res.status(404).send("Donation not found");
+            res.status(404).send("requested donation not found");
             return;
         }
         res.status(204).send();
     } catch (error) {
-        res.status(500).send({ message: "Error deleting donation" });
+        res.status(500).send({ message: "Error deleting requested donation" });
     }
     };
 
