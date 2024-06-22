@@ -70,7 +70,7 @@ import authMiddleware from "../common/auth_middelware";
 
 /**
 * @swagger
-* /rdonations:
+* /requestedDonation/rdonations:
 *   get:
 *     summary: Get all requested donations
 *     tags: [Requested Donation]
@@ -98,7 +98,7 @@ import authMiddleware from "../common/auth_middelware";
 router.get("/rdonations",requestedDonationController.getAllrequestedDonations);
 /**
 * @swagger
-* /rdonation/{id}:
+* /requestedDonation/rdonation/{id}:
 *   get:
 *     summary: Get a requested donation by ID
 *     tags: [Requested Donation]
@@ -144,7 +144,7 @@ router.get("/rdonation/:id",requestedDonationController.getRequestedDonationById
 
 /**
 * @swagger
-* /rdonation:
+* /requestedDonation/rdonation:
 *   post:
 *     summary: Create a new requested donation
 *     tags: [Requested Donation]
@@ -189,7 +189,7 @@ router.get("/rdonation/:id",requestedDonationController.getRequestedDonationById
 router.post("/rdonation",authMiddleware,requestedDonationController.createRequestedDonation);
 /**
 * @swagger
-* /rdonation/update/{id}:
+* /requestedDonation/rdonation/update/{id}:
 *   put:
 *     summary: Update a requested donation by ID
 *     tags: [Requested Donation]
@@ -241,7 +241,7 @@ router.put("/rdonation/update/:id",authMiddleware,requestedDonationController.up
 
 /**
 * @swagger
-* /rdonation/delete/{id}:
+* /requestedDonation/rdonation/delete/{id}:
 *   delete:
 *     summary: Delete a requested donation by ID
 *     tags: [Requested Donation]

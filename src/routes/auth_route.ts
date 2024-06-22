@@ -54,20 +54,22 @@ import authController from "../controllers/auth_controller";
 *         mainAddress:
 *           type: string
 *           description: The donor's main address.
+*         phoneNumber:
+*           type: string
+*           description: The donor's phone number.
 *         refreshTokens:
 *           type: array
 *           items:
 *             type: string
 *           description: The donor's refresh tokens.
 *       example:
-*         first Name: "John"
-*         last Name: "Doe"
-*         _id: "60d725b057d6d8c8c8febe8a"
+*         firstName: "John"
+*         lastName: "Doe"
 *         image: "http://example.com/image.jpg"
-*         email: "johndoe@example.com"
+*         email: "johndoe1@example.com"
 *         password: "mySecurePassword"
 *         mainAddress: "123 Main St, Springfield, IL 62701"
-*         refreshTokens: ["token1", "token2"]
+*         phoneNumber: "555-555-5555"
 */
 
 /**
