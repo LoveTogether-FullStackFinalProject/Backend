@@ -1,49 +1,41 @@
 import { Request, Response } from 'express';
-import Donor, { IDonor }  from '../models/donor_model';
+import Donor, { IDonor } from '../models/donor_model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
 import { Document } from 'mongoose';
 
-
 const client = new OAuth2Client();
+
 const googleSignin = async (req: Request, res: Response) => {
-    console.log( "cradentiasle:" + req.body.credential);
     try {
         const ticket = await client.verifyIdToken({
             idToken: req.body.credential,
             audience: process.env.GOOGLE_CLIENT_ID,
         });
         const payload = ticket.getPayload();
-        
+
         const email = payload?.email;
         if (email != null) {
             let donor = await Donor.findOne({ 'email': email });
             if (donor == null) {
-                donor = await Donor.create(
-                    {
-                        'firstName': payload?.name,
-                        //'lastName': payload?.lastName,
-                        '_id': payload?.sub,
-                        'email': email,
-                        //'phoneNumber': payload?.phoneNumber,
-                       // 'address': payload?.address,
-                        'password': '0',
-                    });
+                donor = await Donor.create({
+                    'firstName': payload?.name,
+                    '_id': payload?.sub,
+                    'email': email,
+                    'password': '0',
+                });
             }
-            const tokens = await generateTokens(donor)
-            res.status(200).send(
-                {
-                    email: donor.email,
-                    _id: donor._id,
-
-                    ...tokens,
-                })
+            const tokens = await generateTokens(donor);
+            res.status(200).send({
+                email: donor.email,
+                _id: donor._id,
+                ...tokens,
+            });
         }
     } catch (err) {
         return res.status(400).send(err.message);
     }
-
 }
 
 const generateTokens = async (donor: Document & IDonor) => {
@@ -62,46 +54,45 @@ const generateTokens = async (donor: Document & IDonor) => {
 }
 
 const register = async (req: Request, res: Response) => {
-  const { firstName, lastName, email, password, phoneNumber, mainAddress, image } = req.body;
-  if (!email || !password) {
-      return res.status(400).send("missing email or password");
-  }
-  try {
-      const existingDonor = await Donor.findOne({ 'email': email });
-      if (existingDonor) {
-          return res.status(406).send("email already exists");
-      }
-      const salt = await bcrypt.genSalt(10);
-      const encryptedPassword = await bcrypt.hash(password, salt);
-      const newDonor = await Donor.create({
-          firstName,
-          lastName,
-          email,
-          password: encryptedPassword,
-          phoneNumber,
-          mainAddress,
-          image
-      });
+    const { firstName, lastName, email, password, phoneNumber, mainAddress, image } = req.body;
+    if (!email || !password) {
+        return res.status(400).send("missing email or password");
+    }
+    try {
+        const existingDonor = await Donor.findOne({ 'email': email });
+        if (existingDonor) {
+            return res.status(406).send("email already exists");
+        }
+        const salt = await bcrypt.genSalt(10);
+        const encryptedPassword = await bcrypt.hash(password, salt);
+        const newDonor = await Donor.create({
+            firstName,
+            lastName,
+            email,
+            password: encryptedPassword,
+            phoneNumber,
+            mainAddress,
+            image
+        });
 
-      const tokens = await generateTokens(newDonor);
-      return res.status(201).send({
-          firstName,
-          lastName,
-          email,
-          phoneNumber,
-          mainAddress,
-          image,
-          ...tokens
-      });
-  } catch (err) {
-      return res.status(400).send(err);
-  }
+        const tokens = await generateTokens(newDonor);
+        return res.status(201).send({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            mainAddress,
+            image,
+            _id: newDonor._id,
+            ...tokens
+        });
+    } catch (err) {
+        return res.status(400).send(err);
+    }
 };
 
-
 const login = async (req: Request, res: Response) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
     if (!email || !password) {
         return res.status(400).send("missing email or password");
     }
@@ -114,15 +105,15 @@ const login = async (req: Request, res: Response) => {
         if (!match) {
             return res.status(401).send("email or password incorrect");
         }
-        const tokens = await generateTokens(donor)
+        const tokens = await generateTokens(donor);
         return res.status(200).send({
-        'firstName': donor.firstName,
-        'lastName':donor.lastName,
-        'email': donor.email, 
-        'phoneNumber' :donor.phoneNumber,
-        'address': donor.mainAddress,
-        'password': donor.password,
-        ...tokens
+            firstName: donor.firstName,
+            lastName: donor.lastName,
+            email: donor.email,
+            phoneNumber: donor.phoneNumber,
+            mainAddress: donor.mainAddress,
+            _id: donor._id,
+            ...tokens
         });
     } catch (err) {
         return res.status(400).send("error missing email or password");
@@ -137,18 +128,18 @@ const logout = async (req: Request, res: Response) => {
         if (err) return res.sendStatus(401);
         try {
             const donorDb = await Donor.findOne({ '_id': donor._id });
-            if(donorDb!=null){
-            if (!donorDb.refreshTokens||!donorDb.refreshTokens.includes(refreshToken)) {
-                donorDb.refreshTokens = [];
-                await donorDb.save();
-                return res.sendStatus(401);
-            } else {
-                donorDb.refreshTokens = donorDb.refreshTokens.filter(t => t !== refreshToken);
-                await donorDb.save();
-                console.log("logout success");
-                return res.sendStatus(200);
+            if (donorDb != null) {
+                if (!donorDb.refreshTokens || !donorDb.refreshTokens.includes(refreshToken)) {
+                    donorDb.refreshTokens = [];
+                    await donorDb.save();
+                    return res.sendStatus(401);
+                } else {
+                    donorDb.refreshTokens = donorDb.refreshTokens.filter(t => t !== refreshToken);
+                    await donorDb.save();
+                    console.log("logout success");
+                    return res.sendStatus(200);
+                }
             }
-        }
         } catch (err) {
             res.sendStatus(401).send(err.message);
         }
@@ -157,10 +148,7 @@ const logout = async (req: Request, res: Response) => {
 
 const refresh = async (req: Request, res: Response) => {
     const authHeader = req.headers['authorization'];
-    console.log("authHeader is: "+ authHeader);
     const refreshToken = authHeader && authHeader.split(' ')[1]; // Bearer <token>
-    console.log(" refreshToken is: "+ refreshToken);
-    console.log(process.env.JWT_REFRESH_SECRET);
     if (refreshToken == null) return res.sendStatus(401);
     jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, async (err, donor: { '_id': string }) => {
         if (err) {
@@ -171,7 +159,7 @@ const refresh = async (req: Request, res: Response) => {
             if (!donorDb) {
                 console.log('Donor not found');
                 return res.sendStatus(401);
-              }
+            }
             if (!donorDb.refreshTokens || !donorDb.refreshTokens.includes(refreshToken)) {
                 donorDb.refreshTokens = [];
                 await donorDb.save();
