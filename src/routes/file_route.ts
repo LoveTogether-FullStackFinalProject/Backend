@@ -80,6 +80,8 @@ const upload = multer({ storage: storage });
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/FileUploadResponse'
+ *       400:
+ *         description: No file uploaded
  */
 
 router.post('/upload', upload.single("file"), function (req, res) { 

@@ -83,7 +83,7 @@ import authController from "../controllers/auth_controller";
 *           schema:
 *             $ref: '#/components/schemas/Donor'
 *     responses:
-*       200:
+*       201:
 *         description: The new donor
 *         content:
 *           application/json:
