@@ -6,6 +6,7 @@ export interface IAdmin {
   email: string; 
   password: string;
   isAdmin: boolean;
+  image?: string;
 }
 
 const adminSchema = new mongoose.Schema<IAdmin>({
@@ -26,6 +27,10 @@ const adminSchema = new mongoose.Schema<IAdmin>({
     required: true,
     default: true,
   },
+  image: {
+    type: String,
+    required: false,
+  }
   
 });
 
