@@ -44,9 +44,9 @@ const deleteDonation = async (req: Request, res: Response): Promise<void> => {
         const { id } = req.params;
         const result = await Donation.findByIdAndDelete(id);
         if (!result) {
-            console.log(Donation not found: ${id});
+            console.log(`Donation not found: ${id}`);
         }
-        console.log(Donation deleted: ${id});
+
         res.status(200).send('Donation deleted successfully');
     } catch (error) {
         console.error('Error deleting donation:', error);
@@ -68,7 +68,7 @@ const uploadDonation = async (req: Request, res: Response): Promise<void> => {
 const getDonationsByUserId = async (req: Request, res: Response): Promise<void> => {
   try {
       const { userId } = req.params;
-      console.log(Fetching donations for userId: ${userId}); // Verify userId
+      console.log(`Fetching donations for userId: ${userId}`); // Verify userId
 
       if (!userId) {
           res.status(400).send('User ID is required');
