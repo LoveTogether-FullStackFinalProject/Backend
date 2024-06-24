@@ -10,7 +10,6 @@ export interface IDonor extends Document {
     mainAddress: string;
     refreshTokens?: string[];
     rating?: string;
-    image?: string;
 }
 
 const DonorSchema = new Schema<IDonor>({
@@ -47,10 +46,6 @@ const DonorSchema = new Schema<IDonor>({
         type: String,
         required: false
     },
-  image: {
-    type: String,
-    required: false,
-  }
 });
 
 const DonorModel = model<IDonor>("Donor", DonorSchema);

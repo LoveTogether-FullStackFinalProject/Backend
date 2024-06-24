@@ -8,7 +8,6 @@ export interface IrequestedDonation {
   itemCondition: string;
   expirationDate: Date;
   description: string;
-  image?: string;
 }
 
 const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
@@ -28,10 +27,6 @@ const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
         type: String,
         required: true,
     },
-    image: {
-        type: String,
-        required: false,
-    }
 
 });
 

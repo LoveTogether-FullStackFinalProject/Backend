@@ -46,7 +46,7 @@ const deleteDonation = async (req: Request, res: Response): Promise<void> => {
         if (!result) {
             console.log(`Donation not found: ${id}`);
         }
-
+        console.log(`Donation deleted: ${id}`);
         res.status(200).send('Donation deleted successfully');
     } catch (error) {
         console.error('Error deleting donation:', error);
