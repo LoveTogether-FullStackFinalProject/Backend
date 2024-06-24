@@ -21,7 +21,9 @@ const googleSignin = async (req: Request, res: Response) => {
             if (donor == null) {
                 donor = await Donor.create({
                     'firstName': payload?.name,
-                    '_id': payload?.sub,
+                    'lastName': payload?.family_name,
+                    'phoneNumber': '0',
+                    'mainAddress': '0',
                     'email': email,
                     'password': '0',
                 });
@@ -34,6 +36,7 @@ const googleSignin = async (req: Request, res: Response) => {
             });
         }
     } catch (err) {
+        console.log("google err",err);
         return res.status(400).send(err.message);
     }
 }
