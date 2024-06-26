@@ -133,7 +133,6 @@ export default router;
  *           type: string
  *         email:
  *           type: string
- *         // Add other properties as needed
  *     DonorInput:
  *       type: object
  *       properties:
@@ -141,5 +140,4 @@ export default router;
  *           type: string
  *         email:
  *           type: string
- *         // Add other properties as needed
  */
