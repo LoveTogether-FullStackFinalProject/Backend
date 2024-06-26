@@ -3,7 +3,8 @@ import multer from "multer";
 
 const router = express.Router();
 
-const base = "https://NeedToFill.cs.colman.ac.il/";
+//const base = "https://NeedToFill.cs.colman.ac.il/";
+const base = "http://localhost:3000/";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
