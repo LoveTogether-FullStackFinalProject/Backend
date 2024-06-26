@@ -6,10 +6,10 @@ const router = express.Router();
 
 /**
  * @swagger
- * /donors:
+ * /donor:
  *   get:
  *     summary: Retrieve all donors
- *     tags: [Donors]
+ *     tags: [Donor]
  *     responses:
  *       200:
  *         description: List of all donors
@@ -24,10 +24,10 @@ router.get('/', DonorController.get);
 
 /**
  * @swagger
- * /donors/{id}:
+ * /donor/{id}:
  *   get:
  *     summary: Get a donor by ID
- *     tags: [Donors]
+ *     tags: [Donor]
  *     parameters:
  *       - in: path
  *         name: id
@@ -48,10 +48,10 @@ router.get('/:id', DonorController.getById);
 
 /**
  * @swagger
- * /donors:
+ * /donor:
  *   post:
  *     summary: Create a new donor
- *     tags: [Donors]
+ *     tags: [Donor]
  *     requestBody:
  *       required: true
  *       content:
@@ -70,10 +70,10 @@ router.post('/', DonorController.post);
 
 /**
  * @swagger
- * /donors/{id}:
+ * /donor/{id}:
  *   put:
  *     summary: Update a donor by ID
- *     tags: [Donors]
+ *     tags: [Donor]
  *     parameters:
  *       - in: path
  *         name: id
@@ -100,10 +100,10 @@ router.put('/:id', DonorController.putById);
 
 /**
  * @swagger
- * /donors/{id}:
+ * /donor/{id}:
  *   delete:
  *     summary: Delete a donor by ID
- *     tags: [Donors]
+ *     tags: [Donor]
  *     parameters:
  *       - in: path
  *         name: id
