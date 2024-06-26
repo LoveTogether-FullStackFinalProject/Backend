@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 export interface IrequestedDonation {
   _id: string;
+  itemName: string;
   category: string;
-  productType: string; 
   amount: number;
   itemCondition: string;
   expirationDate: Date;
@@ -12,11 +12,11 @@ export interface IrequestedDonation {
 }
 
 const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
-    category: {
+    itemName: {
         type: String,
-        required: true,
+        required: false,
     },
-    productType: {
+    category: {
         type: String,
         required: true,
     },
