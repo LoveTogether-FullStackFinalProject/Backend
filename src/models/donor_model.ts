@@ -11,6 +11,7 @@ export interface IDonor extends Document {
     refreshTokens?: string[];
     rating?: string;
     image?: string;
+    isAdmin?: boolean;
 }
 
 const DonorSchema = new Schema<IDonor>({
@@ -50,7 +51,11 @@ const DonorSchema = new Schema<IDonor>({
   image: {
     type: String,
     required: false,
-  }
+  },
+ isAdmin: {
+        type: Boolean,
+        required: true,
+    },
 });
 
 const DonorModel = model<IDonor>("Donor", DonorSchema);

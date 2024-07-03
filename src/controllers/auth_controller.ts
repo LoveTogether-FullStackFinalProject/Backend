@@ -57,7 +57,7 @@ const generateTokens = async (donor: Document & IDonor) => {
 }
 
 const register = async (req: Request, res: Response) => {
-    const { firstName, lastName, email, password, phoneNumber, mainAddress, image } = req.body;
+    const { firstName, lastName, email, password, phoneNumber, mainAddress,isAdmin, image } = req.body;
     if (!email || !password) {
         return res.status(400).send("missing email or password");
     }
@@ -75,6 +75,7 @@ const register = async (req: Request, res: Response) => {
             password: encryptedPassword,
             phoneNumber,
             mainAddress,
+            isAdmin,
             image
         });
 
