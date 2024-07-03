@@ -5,9 +5,9 @@ import authMiddleware from "../common/auth_middelware";
 const router = express.Router();
 
 
-router.get("/",authMiddleware,adminMiddleware,AdminController.getAllUsers);
-router.get("/admin",authMiddleware,adminMiddleware,AdminController.getAdmin);
-router.get("/:id",authMiddleware,adminMiddleware,AdminController.getUserById);
+router.get("/",AdminController.getAllUsers);
+router.get("/admin",AdminController.getAdmin);
+router.get("/:id",AdminController.getUserById);
 router.delete("/delete/:id",authMiddleware,adminMiddleware,AdminController.deleteUser);
 router.put("/update/:id",authMiddleware,adminMiddleware,AdminController.updateUser);
 router.get("/donations",authMiddleware,adminMiddleware,AdminController.getAllDonations);
