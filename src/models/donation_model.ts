@@ -11,6 +11,7 @@ export interface IDonation {
   pickupAddress: string;
   donor: mongoose.Types.ObjectId;
   status: string;
+  approvedByAdmin?: string; 
   image?: string;
 }
 
@@ -55,6 +56,11 @@ const donationSchema = new mongoose.Schema<IDonation>({
   status: {
     type: String,
     required: false,
+  },
+  approvedByAdmin: {
+    type: String,
+    required: false,
+    default: 'false',
   },
 });
 
