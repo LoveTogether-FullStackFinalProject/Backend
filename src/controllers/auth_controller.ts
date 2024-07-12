@@ -26,6 +26,7 @@ const googleSignin = async (req: Request, res: Response) => {
                     'mainAddress': '0',
                     'email': email,
                     'password': '0',
+                    'isAdmin': false
                 });
             }
             const tokens = await generateTokens(donor);
@@ -98,15 +99,18 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     if (!email || !password) {
+        console.log("missing email or password");
         return res.status(400).send("missing email or password");
     }
     try {
         const donor = await Donor.findOne({ 'email': email });
         if (donor == null) {
+            console.log("email or password incorrect");
             return res.status(401).send("email or password incorrect");
         }
         const match = await bcrypt.compare(password, donor.password);
         if (!match) {
+            console.log("email or password incorrect2");
             return res.status(401).send("email or password incorrect");
         }
         const tokens = await generateTokens(donor);
