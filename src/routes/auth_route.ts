@@ -70,6 +70,7 @@ import authController from "../controllers/auth_controller";
 *         password: "mySecurePassword"
 *         mainAddress: "123 Main St, Springfield, IL 62701"
 *         phoneNumber: "555-555-5555"
+*         isAdmin: false
 */
 
 /**
