@@ -96,7 +96,7 @@ router.post('/', DonorController.post);
  *       404:
  *         description: Donor not found
  */
-router.put('/:id', DonorController.putById);
+router.put('/:id',authMiddleware,  DonorController.putById);
 
 /**
  * @swagger
@@ -116,7 +116,7 @@ router.put('/:id', DonorController.putById);
  *       404:
  *         description: Donor not found
  */
-router.delete('/:id', DonorController.deleteById);
+router.delete('/:id',authMiddleware, DonorController.deleteById);
 
 export default router;
 
