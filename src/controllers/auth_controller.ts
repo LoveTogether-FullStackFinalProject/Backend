@@ -158,8 +158,10 @@ const refresh = async (req: Request, res: Response) => {
     const authHeader = req.headers['authorization'];
     const refreshToken = authHeader && authHeader.split(' ')[1]; // Bearer <token>
     if (refreshToken == null) return res.sendStatus(401);
+    console.log("refreshToken is:",refreshToken);
     jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, async (err, donor: { '_id': string }) => {
         if (err) {
+            console.log("refreshToken err1:",err.message);
             return res.sendStatus(401);
         }
         try {
@@ -171,6 +173,7 @@ const refresh = async (req: Request, res: Response) => {
             if (!donorDb.refreshTokens || !donorDb.refreshTokens.includes(refreshToken)) {
                 donorDb.refreshTokens = [];
                 await donorDb.save();
+                console.log("refreshToken err2");
                 return res.sendStatus(401);
             }
             const accessToken = jwt.sign({ _id: donor._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION });
@@ -183,6 +186,7 @@ const refresh = async (req: Request, res: Response) => {
                 'refreshToken': newRefreshToken
             });
         } catch (err) {
+            console.log("refreshToken err3:",err.message);
             res.sendStatus(401).send(err.message);
         }
     });
