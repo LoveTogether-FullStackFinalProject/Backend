@@ -95,8 +95,7 @@ describe("Donor tests", () => {
 
   test("Test get donor by id", async () => {
     const response = await request(app)
-      .get("/donor/" + createdDonorId)
-      .set("Authorization", "Bearer " + accessToken);
+      .get("/donor/" + createdDonorId);
     expect(response.statusCode).toBe(200);
     expect(response.body.firstName).toBe(newDonor.firstName);
     expect(response.body.lastName).toBe(newDonor.lastName);
