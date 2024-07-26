@@ -44,7 +44,7 @@ router.get('/', DonorController.get);
  *       404:
  *         description: Donor not found
  */
-router.get('/:id', DonorController.getById);
+router.get('/:id',authMiddleware, DonorController.getById);
 
 /**
  * @swagger
@@ -66,7 +66,7 @@ router.get('/:id', DonorController.getById);
  *             schema:
  *               $ref: '#/components/schemas/Donor'
  */
-router.post('/', DonorController.post);
+router.post('/',authMiddleware, DonorController.post);
 
 /**
  * @swagger
