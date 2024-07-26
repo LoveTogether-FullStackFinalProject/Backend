@@ -35,6 +35,7 @@ const updateDonation = async (req: Request, res: Response): Promise<void> => {
         }
         res.status(200).json(donation);
     } catch (error) {
+        console.error('Error updating donation:', error);
         res.status(500).json({ message: 'Error updating donation' });
     }
 };
