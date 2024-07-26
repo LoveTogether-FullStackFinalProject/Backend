@@ -92,6 +92,7 @@ const register = async (req: Request, res: Response) => {
             ...tokens
         });
     } catch (err) {
+        console.log("register err",err);
         return res.status(400).send(err);
     }
 };

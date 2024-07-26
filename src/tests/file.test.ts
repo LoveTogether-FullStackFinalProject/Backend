@@ -6,7 +6,7 @@ import { Express } from "express";
 let app: Express;
 
 beforeAll(async () => {
-    //app = await initApp();
+    app = await initApp();
     console.log("beforeAll");
 });
 
@@ -17,14 +17,15 @@ afterAll(async () => {
 describe("File Tests", () => {
     test("upload file", async () => {
         const filePath = `${__dirname}/image.png`;
-        console.log(filePath);
-
+        console.log("filePath",filePath);
         try {
             const response = await request(app)
-                .post("/file?file=123.webp").attach('file', filePath)
+            .post("/photos/upload")
+            .attach('file', filePath);
+               // .post("/photos/upload?file=123.png").attach('file', filePath)
             expect(response.statusCode).toEqual(200);
             let url = response.body.url;
-            console.log(url);
+            console.log("url",url);
             url = url.replace(/^.*\/\/[^/]+/, '')
             const res = await request(app).get(url)
             expect(res.statusCode).toEqual(200);
