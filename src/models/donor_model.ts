@@ -12,6 +12,7 @@ export interface IDonor extends Document {
     rating?: string;
     image?: string;
     isAdmin?: boolean;
+    isPublished?: boolean;
 }
 
 const DonorSchema = new Schema<IDonor>({
@@ -55,6 +56,10 @@ const DonorSchema = new Schema<IDonor>({
  isAdmin: {
         type: Boolean,
         required: true,
+    },
+ isPublished: {
+        type: Boolean,
+        required: false,
     },
 });
 
