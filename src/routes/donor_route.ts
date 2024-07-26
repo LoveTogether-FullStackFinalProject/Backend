@@ -44,7 +44,7 @@ router.get('/', DonorController.get);
  *       404:
  *         description: Donor not found
  */
-router.get('/:id',authMiddleware, DonorController.getById);
+router.get('/:id', DonorController.getById);
 
 /**
  * @swagger
