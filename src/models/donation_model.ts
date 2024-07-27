@@ -10,6 +10,8 @@ export interface IDonation {
   description: string;
   pickupAddress: string;
   donor: mongoose.Types.ObjectId;
+  donorName?: string;   // Added field for donor's name
+  donorPhone?: string;  // Added field for donor's phone number
   status: string;
   approvedByAdmin?: string; 
   image?: string;
@@ -54,6 +56,14 @@ const donationSchema = new mongoose.Schema<IDonation>(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Donor',
       required: true,
+    },
+    donorName: {
+      type: String,
+      required: false,
+    },
+    donorPhone: {
+      type: String,
+      required: false,
     },
     status: {
       type: String,
