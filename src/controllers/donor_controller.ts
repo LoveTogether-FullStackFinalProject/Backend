@@ -19,6 +19,7 @@ class DonorController {
       }
       res.status(200).json(donor);
     } catch (error) {
+      console.log("getById",error);
       res.status(500).json({ message: error.message });
     }
   }
