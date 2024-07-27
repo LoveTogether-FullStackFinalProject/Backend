@@ -28,6 +28,10 @@ const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
         type: String,
         required: true,
     },
+    itemCondition: {
+        type: String,
+        required: true,
+    },
     // expirationDate: {
     //     type: Date,
     //     required: false,
