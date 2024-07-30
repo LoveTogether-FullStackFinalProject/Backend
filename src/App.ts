@@ -13,6 +13,7 @@ import swaggerUI from "swagger-ui-express"
 import swaggerJsDoc from "swagger-jsdoc"
 import cors from "cors";
 
+
 const initApp = (): Promise<Express> => {
   const promise = new Promise<Express>((resolve) => {
     const db = mongoose.connection;
