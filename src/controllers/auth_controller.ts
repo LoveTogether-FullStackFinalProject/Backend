@@ -50,6 +50,7 @@ const generateTokens = async (donor: Document & IDonor) => {
     } else {
         donor.refreshTokens.push(refreshToken);
     }
+    console.log("donor.refreshTokens in generateTokens:",donor.refreshTokens);
     await donor.save();
     return {
         'accessToken': accessToken,
@@ -172,6 +173,7 @@ const refresh = async (req: Request, res: Response) => {
                 return res.sendStatus(401);
             }
             if (!donorDb.refreshTokens || !donorDb.refreshTokens.includes(refreshToken)) {
+                console.log("donorDb.refreshTokens:", donorDb.refreshTokens);
                 donorDb.refreshTokens = [];
                 await donorDb.save();
                 console.log("refreshToken err2");
@@ -182,6 +184,9 @@ const refresh = async (req: Request, res: Response) => {
             donorDb.refreshTokens = donorDb.refreshTokens.filter(t => t !== refreshToken);
             donorDb.refreshTokens.push(newRefreshToken);
             await donorDb.save();
+            console.log("new accessToken is:",accessToken); 
+            console.log("newRefreshToken is:",newRefreshToken); 
+            console.log("refreshToken success");
             return res.status(200).send({
                 'accessToken': accessToken,
                 'refreshToken': newRefreshToken

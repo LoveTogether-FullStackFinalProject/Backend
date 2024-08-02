@@ -40,6 +40,7 @@ class DonorController {
       if (!donor) {
         return res.status(404).json({ message: 'Donor not found' });
       }
+      console.log("putById succsses");
       res.status(200).json(donor);
     } catch (error) {
       res.status(500).json({ message: error.message });
