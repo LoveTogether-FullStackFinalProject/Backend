@@ -77,6 +77,7 @@ initApp().then((app) => {
     key: fs.readFileSync(keyPath),
     cert: fs.readFileSync(certPath),
   };
+  console.log("ENV:", process.env.NODE_ENV);
   const server = https.createServer(options2, app);
 
   server.listen(process.env.HTTPS_PORT, () => {
