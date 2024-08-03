@@ -1,21 +1,76 @@
-import initApp from "./App";
-import https from 'https';
+// import env from "dotenv";
+// console.log(process.env.NODE_ENV);
+// env.config();
+
+// console.log(process.env.DB_URL);
+// import initApp from "./app";
+// import swaggerUI from "swagger-ui-express";
+// import swaggerJsDoc from "swagger-jsdoc";
+// import http from 'http';
+// import https from 'https';
+// import fs from 'fs';
+// import path from "path";
+
+
+// initApp().then((app) => {
+//   console.log('Server started')
+//   if (process.env.NODE_ENV !== 'production') {
+//     console.log('development');
+//     http.createServer(app).listen(process.env.PORT);
+//   } else {
+//     console.log('PRODUCTION');
+//     const options2 = {
+//       key: fs.readFileSync('../client-key.pem'),
+//       cert: fs.readFileSync('../client-cert.pem')
+//     };
+//     https.createServer(options2, app).listen(process.env.HTTPS_PORT);
+//   }
+// });
+
+
+import env from "dotenv";
+console.log(process.env.NODE_ENV);
+env.config();
+
+console.log(process.env.DB_URL);
+import initApp from "./app";
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 import http from 'http';
+import https from 'https';
 import fs from 'fs';
-import swaggerUI from "swagger-ui-express"
-import swaggerJsDoc from "swagger-jsdoc"
+import path from "path";
+
 
 initApp().then((app) => {
+  console.log('Server started')
+  const options = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "Vehahavtem Together 2024",
+        version: "1.0.1",
+        description: "Full Stack Project 2024",
+      },
+      //servers: [{ url: "http://localhost:3000", },],
+      servers: [{ url: "https://node12.cs.colman.ac.il/", },],
+    },
+    apis: ["./src/routes/*.ts"],
+  };
+  const specs = swaggerJsDoc(options);
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+ 
 
   if (process.env.NODE_ENV !== 'production') {
     console.log('development');
     http.createServer(app).listen(process.env.PORT);
-  } else {
-    console.log('PRODUCTION');
-    const options2 = {
-      key: fs.readFileSync('../client-key.pem'),
-      cert: fs.readFileSync('../client-cert.pem')
-    };
-    https.createServer(options2, app).listen(process.env.HTTPS_PORT);
   }
+  else {
+  console.log('PRODUCTION');
+  const options2 = {
+    key: fs.readFileSync(path.join(__dirname,'../../client-key.pem')),
+    cert: fs.readFileSync(path.join(__dirname,'../../client-cert.pem')),
+  };
+  https.createServer(options2, app).listen(process.env.HTTPS_PORT);
+ }
 });
