@@ -33,7 +33,7 @@ console.log(process.env.NODE_ENV);
 env.config();
 
 console.log(process.env.DB_URL);
-import initApp from "./app";
+import initApp from "./App";
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import http from 'http';
