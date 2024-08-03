@@ -32,6 +32,9 @@ import env from "dotenv";
 console.log(process.env.NODE_ENV);
 env.config();
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 console.log(process.env.DB_URL);
 import initApp from "./App";
 import swaggerUI from "swagger-ui-express";
