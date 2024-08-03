@@ -67,9 +67,15 @@ initApp().then((app) => {
   }
   else {
   console.log('PRODUCTION');
+  const keyPath = path.join(__dirname, '../../client-key.pem');
+  const certPath = path.join(__dirname, '../../client-cert.pem');
+
+  console.log('Key Path:', keyPath);
+  console.log('Cert Path:', certPath);
+
   const options2 = {
-    key: fs.readFileSync(path.join(__dirname,'../../client-key.pem')),
-    cert: fs.readFileSync(path.join(__dirname,'../../client-cert.pem')),
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(certPath),
   };
   https.createServer(options2, app).listen(process.env.HTTPS_PORT);
  }
