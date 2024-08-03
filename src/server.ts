@@ -77,6 +77,15 @@ initApp().then((app) => {
     key: fs.readFileSync(keyPath),
     cert: fs.readFileSync(certPath),
   };
-  https.createServer(options2, app).listen(process.env.HTTPS_PORT);
- }
+  const server = https.createServer(options2, app);
+
+  server.listen(process.env.HTTPS_PORT, () => {
+    console.log("HTTPS server running on port", process.env.HTTPS_PORT);
+  });
+
+  server.on('error', (error) => {
+    console.error('HTTPS server error:', error);
+  });
+
+  }
 });
