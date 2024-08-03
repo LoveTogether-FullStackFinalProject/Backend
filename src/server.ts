@@ -80,6 +80,7 @@ initApp().then((app) => {
   console.log("ENV:", process.env.NODE_ENV);
   const server = https.createServer(options2, app);
 
+  console.log("HTTPS_PORT:", process.env.HTTPS_PORT);
   server.listen(process.env.HTTPS_PORT, () => {
     console.log("HTTPS server running on port", process.env.HTTPS_PORT);
   });
