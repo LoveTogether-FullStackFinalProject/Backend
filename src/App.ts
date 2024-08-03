@@ -21,7 +21,7 @@ const initApp = (): Promise<Express> => {
     db.on("error", (error) => console.error(error));
     let url;
     if(process.env.NODE_ENV === 'production'){
-      url = process.env.DB_URL_PROD;
+      url = process.env.DB_URL;
     }
     else{
       url = process.env.DB_URL;
