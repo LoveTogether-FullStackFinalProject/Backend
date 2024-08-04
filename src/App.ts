@@ -24,7 +24,7 @@ const initApp = (): Promise<Express> => {
       url = process.env.DB_URL;
     }
     else{
-      url = process.env.DB_URL;
+      url = process.env.DB_URL_PROD;
     }
     console.log("url",url);
     mongoose.connect(url!).then(() => {
@@ -37,21 +37,7 @@ const initApp = (): Promise<Express> => {
         res.header("Access-Control-Allow-Headers", "*");
         next();
       })
-      // const options = {
-      //   definition: {
-      //     openapi: "3.0.0",
-      //     info: {
-      //       title: "Vehahavtem Together 2024",
-      //       version: "1.0.1",
-      //       description: "Full Stack Project 2024",
-      //     },
-      //     servers: [{ url: "http://localhost:3000", },],
-      //   //   servers: [{ url: "https://node12.cs.colman.ac.il/", },],
-      //   },
-      //   apis: ["./src/routes/*.ts"],
-      // };
-      // const specs = swaggerJsDoc(options);
-      // app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+      
 
       app.use(cors({
         origin: 'http://localhost:5173', 
