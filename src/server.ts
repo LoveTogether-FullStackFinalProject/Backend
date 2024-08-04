@@ -32,14 +32,18 @@ import env from "dotenv";
 console.log(process.env.NODE_ENV);
 env.config();
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 console.log(process.env.DB_URL);
-import initApp from "./app";
+import initApp from "./App";
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import http from 'http';
 import https from 'https';
 import fs from 'fs';
 import path from "path";
+
 
 
 initApp().then((app) => {
@@ -67,10 +71,27 @@ initApp().then((app) => {
   }
   else {
   console.log('PRODUCTION');
+  const keyPath = path.join(__dirname, '../../client-key.pem');
+  const certPath = path.join(__dirname, '../../client-cert.pem');
+
+  console.log('Key Path:', keyPath);
+  console.log('Cert Path:', certPath);
+
   const options2 = {
-    key: fs.readFileSync(path.join(__dirname,'../../client-key.pem')),
-    cert: fs.readFileSync(path.join(__dirname,'../../client-cert.pem')),
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(certPath),
   };
-  https.createServer(options2, app).listen(process.env.HTTPS_PORT);
- }
+  console.log("ENV:", process.env.NODE_ENV);
+  const server = https.createServer(options2, app);
+
+  console.log("HTTPS_PORT:", process.env.HTTPS_PORT);
+  server.listen(process.env.HTTPS_PORT, () => {
+    console.log("HTTPS server running on port", process.env.HTTPS_PORT);
+  });
+
+  server.on('error', (error) => {
+    console.error('HTTPS server error:', error);
+  });
+
+  }
 });

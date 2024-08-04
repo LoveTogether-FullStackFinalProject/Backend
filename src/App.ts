@@ -19,7 +19,14 @@ const initApp = (): Promise<Express> => {
     const db = mongoose.connection;
     db.once("open", () => console.log("Connected to Database"));
     db.on("error", (error) => console.error(error));
-    const url = process.env.DB_URL;
+    let url;
+    if(process.env.NODE_ENV === 'production'){
+      url = process.env.DB_URL;
+    }
+    else{
+      url = process.env.DB_URL;
+    }
+    console.log("url",url);
     mongoose.connect(url!).then(() => {
       const app = express();
       app.use(bodyParser.json());

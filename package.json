@@ -11,7 +11,8 @@
     "testDonation": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/donation.test.ts",
     "testAdmin": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/admin.test.ts",
     "testDonor": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/donor.test.ts",
-    "testFile": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/file.test.ts"
+    "testFile": "tsc && jest --detectOpenHandles --forceExit --runInBand ./src/tests/file.test.ts",
+    "prod": "tsc -p tsconfig.json && cross-env NODE_ENV=production dotenv_config_path=./.env.prod pm2 start ./dist/src/server.js"
   },
   "keywords": [],
   "author": "",
