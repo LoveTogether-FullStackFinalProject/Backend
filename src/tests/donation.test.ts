@@ -17,6 +17,19 @@ interface IDonor {
     mainAddress: string;
     isAdmin?: boolean;
   }
+
+  interface IDonation {
+    itemName: string;
+    quantity: number;
+    category: string;
+    condition: string;
+    expirationDate: Date;
+    description: string;
+    pickupAddress: string;
+    donor: mongoose.Types.ObjectId;
+    status: string;
+    image?: string;
+  }
   
   const donor: IDonor = {
     firstName: "John",
