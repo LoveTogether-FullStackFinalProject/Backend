@@ -11,7 +11,7 @@ export interface IrequestedDonation {
   image?: string;
 }
 
-const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
+const requestedDonationSchema = new Schema<IrequestedDonation>({
     itemName: {
         type: String,
         required: false,
@@ -43,7 +43,7 @@ const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
 
 });
 
-export const requestedDonationModel = model<IrequestedDonation>("requestedDonation", requestedDonationSchema);
+const requestedDonationModel = model<IrequestedDonation>("requestedDonation", requestedDonationSchema);
 export default requestedDonationModel;
 
 

@@ -9,7 +9,7 @@ export interface IAdmin {
   image?: string;
 }
 
-const adminSchema = new mongoose.Schema<IAdmin>({
+const adminSchema = new Schema<IAdmin>({
   name: {
     type: String,
     required: true,
@@ -34,6 +34,6 @@ const adminSchema = new mongoose.Schema<IAdmin>({
   
 });
 
-export const AdminModel = model<IAdmin>("Admin", adminSchema);
+const AdminModel = model<IAdmin>("Admin", adminSchema);
 export default AdminModel;
 
