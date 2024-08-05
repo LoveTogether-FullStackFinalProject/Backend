@@ -2,7 +2,7 @@
 import request from 'supertest';
 import initApp from '../App';
 import mongoose from 'mongoose';
-import DonationModel, { IDonation } from '../models/donation_model';
+// import DonationModel, { IDonation } from '../models/donation_model';
 import e, { Express } from 'express';
 
 let app: Express;
