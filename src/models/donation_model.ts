@@ -78,5 +78,5 @@ const donationSchema = new Schema<IDonation>(
   { timestamps: true } 
 );
 
-export const DonationModel = model<IDonation>("Donation", donationSchema);
+const DonationModel = model<IDonation>("Donation", donationSchema);
 export default DonationModel;
