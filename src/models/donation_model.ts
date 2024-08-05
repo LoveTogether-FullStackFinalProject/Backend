@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, Document } from "mongoose";
 import { IDonor } from "./donor_model";
 
-export interface IDonation {
+export interface IDonation extends Document{
   itemName: string;
   quantity: number;
   category: string;
@@ -18,7 +18,7 @@ export interface IDonation {
   createdAt?: Date; 
 }
 
-const donationSchema = new mongoose.Schema<IDonation>(
+const donationSchema = new Schema<IDonation>(
   {
     itemName: {
       type: String,
