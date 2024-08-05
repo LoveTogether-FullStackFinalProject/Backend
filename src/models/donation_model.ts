@@ -78,5 +78,5 @@ const donationSchema = new mongoose.Schema<IDonation>(
   { timestamps: true } 
 );
 
-export const DonationModel = mongoose.model<IDonation>("Donation", donationSchema);
+export const DonationModel = model<IDonation>("Donation", donationSchema);
 export default DonationModel;
