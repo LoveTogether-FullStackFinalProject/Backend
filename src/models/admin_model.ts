@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, model, Document } from "mongoose";
 
 export interface IAdmin {
   _id: string;
@@ -34,6 +34,6 @@ const adminSchema = new mongoose.Schema<IAdmin>({
   
 });
 
-export const AdminModel = mongoose.model<IAdmin>("Admin", adminSchema);
+export const AdminModel = model<IAdmin>("Admin", adminSchema);
 export default AdminModel;
 

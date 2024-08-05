@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, model, Document } from "mongoose";
 
 export interface IrequestedDonation {
   _id: string;
@@ -43,7 +43,7 @@ const requestedDonationSchema = new mongoose.Schema<IrequestedDonation>({
 
 });
 
-export const requestedDonationModel = mongoose.model<IrequestedDonation>("requestedDonation", requestedDonationSchema);
+export const requestedDonationModel = model<IrequestedDonation>("requestedDonation", requestedDonationSchema);
 export default requestedDonationModel;
 
 
