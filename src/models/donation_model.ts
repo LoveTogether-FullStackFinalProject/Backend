@@ -13,6 +13,7 @@ export interface IDonation extends Document{
   donorName?: string;   // Added field for donor's name
   donorPhone?: string;  // Added field for donor's phone number
   status: string;
+  branch?: string;
   approvedByAdmin?: string; 
   image?: string;
   createdAt?: Date; 
@@ -66,6 +67,10 @@ const donationSchema = new Schema<IDonation>(
       required: false,
     },
     status: {
+      type: String,
+      required: false,
+    },
+    branch: {
       type: String,
       required: false,
     },
