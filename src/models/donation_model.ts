@@ -8,7 +8,7 @@ export interface IDonation extends Document{
   condition: string;
   expirationDate: Date;
   description: string;
-  pickupAddress: string;
+  pickupAddress?: string;
   donor: mongoose.Types.ObjectId;
   donorName?: string;   // Added field for donor's name
   donorPhone?: string;  // Added field for donor's phone number
