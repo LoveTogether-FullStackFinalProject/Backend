@@ -77,8 +77,11 @@ const initApp = (): Promise<Express> => {
           app.use("/donor", DonorRoute);
           app.use('/photos', FileRoute); 
           app.use("/requestedDonation", requestedDonationRoute);
-
           app.use('/public', express.static('public'));
+          app.use(express.static('dist/client'))
+          app.get('*',function (req, res) {
+            res.sendfile('dist/client/index.html');
+          });
           
           resolve(app);
         })
