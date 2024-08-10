@@ -58,7 +58,8 @@ const initApp = (): Promise<Express> => {
                 version: "1.0.1",
                 description: "Full Stack Project 2024",
               },
-              servers: [{ url: "http://localhost:3000" }],
+              //servers: [{ url: "http://localhost:3000" }],
+              servers: [{ url: "http://ve-be.cs.colman.ac.il" }],
             },
             apis: ["./src/routes/*.ts"],
           };
