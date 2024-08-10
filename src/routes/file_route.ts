@@ -53,7 +53,7 @@ const upload = multer({ storage: storage });
  *           type: string
  *           description: The URL of the uploaded file
  *       example:
- *        url: "http://localhost:3000/public/1625760000000.jpg"
+ *        url: "https://node12.cs.colman.ac.il/public/1625760000000.jpg"
  * */
 
  /**
