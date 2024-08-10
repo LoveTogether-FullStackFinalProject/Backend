@@ -67,7 +67,7 @@ const initApp = (): Promise<Express> => {
           app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
           app.use(cors({
-            origin: 'http://localhost:5173',
+            origin: 'https://node12.cs.colman.ac.il',
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
           }));
