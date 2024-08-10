@@ -198,8 +198,8 @@ const upload = multer({ storage: storage });
 
 router.post('/upload', upload.single('file'), function (req, res) { 
     if (req.file) {
-        // Construct the URL for the uploaded file
-        const fileUrl = `${base}/public/${req.file.filename}`;
+        // Construct the URL for the uploaded file with hardcoded base URL
+        const fileUrl = `https://node12.cs.colman.ac.il/public/${req.file.filename}`;
         res.status(200).send({ url: fileUrl });
     } else {
         res.status(400).send('No file uploaded');
