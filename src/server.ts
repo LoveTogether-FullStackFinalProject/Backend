@@ -57,7 +57,7 @@ initApp().then((app) => {
         description: "Full Stack Project 2024",
       },
       //servers: [{ url: "http://localhost:3000", },],
-      servers: [{ url: "https://ve-be.cs.colman.ac.il", },],
+      servers: [{ url: "https://node12.cs.colman.ac.il", },],
     },
     apis: ["./src/routes/*.ts"],
   };
