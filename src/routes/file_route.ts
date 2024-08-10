@@ -85,23 +85,23 @@ const upload = multer({ storage: storage });
  *         description: No file uploaded
  */
 
-// router.post('/upload', upload.single("file"), function (req, res) { 
-//     if (req.file) {
-//         console.log("router.post(/file: " + base + req.file.path);
-//         res.status(200).send({ url: base + req.file.path });
-//     } else {
-//         res.status(400).send("No file uploaded");
-//     }
-// });
-
-router.post('/upload', upload.single('file'), function (req, res) { 
+router.post('/upload', upload.single("file"), function (req, res) { 
     if (req.file) {
-        // Strip the 'public/' prefix from the file path
-        const fileUrl = `${base}/public/${req.file.filename}`;
-        res.status(200).send({ url: fileUrl });
+        console.log("router.post(/file: " + 'https://node12.cs.colman.ac.il/' + req.file.path);
+        res.status(200).send({ url: 'https://node12.cs.colman.ac.il/' + req.file.path });
     } else {
-        res.status(400).send('No file uploaded');
+        res.status(400).send("No file uploaded");
     }
 });
+
+// router.post('/upload', upload.single('file'), function (req, res) { 
+//     if (req.file) {
+//         // Strip the 'public/' prefix from the file path
+//         const fileUrl = `${base}/public/${req.file.filename}`;
+//         res.status(200).send({ url: fileUrl });
+//     } else {
+//         res.status(400).send('No file uploaded');
+//     }
+// });
 
 export default router;
