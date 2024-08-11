@@ -59,7 +59,7 @@ const initApp = (): Promise<Express> => {
                 description: "Full Stack Project 2024",
               },
               //servers: [{ url: "http://localhost:3000" }],
-              servers: [{ url: "https://node12.cs.colman.ac.il" }],
+              servers: [{ url: "https://ve-be.cs.colman.ac.il" }],
             },
             apis: ["./src/routes/*.ts"],
           };
@@ -67,7 +67,7 @@ const initApp = (): Promise<Express> => {
           app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
           app.use(cors({
-            origin: ['http://localhost:5173', 'https://node12.cs.colman.ac.il'], 
+            origin: ['http://localhost:5173', 'https://ve-be.cs.colman.ac.il'], 
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
           }));
