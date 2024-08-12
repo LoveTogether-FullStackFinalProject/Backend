@@ -114,7 +114,7 @@ import multer from 'multer';
 import path from 'path';
 
 const router = express.Router();
-const base = "https://node12.cs.colman.ac.il";
+const base = "https://ve-be.cs.colman.ac.il";
 
 // Configure multer for file storage
 const storage = multer.diskStorage({
@@ -199,7 +199,7 @@ const upload = multer({ storage: storage });
 router.post('/upload', upload.single('file'), function (req, res) { 
     if (req.file) {
         // Construct the URL for the uploaded file with hardcoded base URL
-        const fileUrl = `https://node12.cs.colman.ac.il/public/${req.file.filename}`;
+        const fileUrl = `https://ve-be.cs.colman.ac.il/public/${req.file.filename}`;
         res.status(200).send({ url: fileUrl });
     } else {
         res.status(400).send('No file uploaded');
