@@ -9,6 +9,7 @@ export interface IrequestedDonation {
 //   expirationDate?: Date;
   description: string;
   image?: string;
+  customCategory?: string;
 }
 
 const requestedDonationSchema = new Schema<IrequestedDonation>({
@@ -37,6 +38,10 @@ const requestedDonationSchema = new Schema<IrequestedDonation>({
     //     required: false,
     // },
     image: {
+        type: String,
+        required: false,
+    },
+    customCategory: {
         type: String,
         required: false,
     }

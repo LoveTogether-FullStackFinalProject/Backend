@@ -200,6 +200,7 @@ router.post('/upload', upload.single('file'), function (req, res) {
     if (req.file) {
         // Construct the URL for the uploaded file with hardcoded base URL
         const fileUrl = `https://ve-be.cs.colman.ac.il/public/${req.file.filename}`;
+        console.log("router.post(/file: " + fileUrl);
         res.status(200).send({ url: fileUrl });
     } else {
         res.status(400).send('No file uploaded');
