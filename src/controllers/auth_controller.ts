@@ -78,6 +78,7 @@ const register = async (req: Request, res: Response) => {
             phoneNumber,
             mainAddress,
             isAdmin,
+            rating: '0',
             image
         });
 
