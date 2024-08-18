@@ -12,6 +12,7 @@ const googleSignin = async (req: Request, res: Response) => {
         const ticket = await client.verifyIdToken({
             idToken: req.body.credential,
             audience: process.env.GOOGLE_CLIENT_ID,
+            maxExpiry: 60 * 60 * 24, // Token should be valid for 24 hours max
         });
         const payload = ticket.getPayload();
 
@@ -37,7 +38,7 @@ const googleSignin = async (req: Request, res: Response) => {
             });
         }
     } catch (err) {
-        console.log("google err",err);
+        console.log("google err", err);
         return res.status(400).send(err.message);
     }
 }
