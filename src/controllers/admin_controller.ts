@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Admin from "../models/admin_model";
 import bcrypt from "bcrypt";
 import Donor from "../models/donor_model";
-import Donation from "../models/donation_model";
+import Donation from "../models/donationModal";
 
 interface CustomRequest extends Request {
   locals: {

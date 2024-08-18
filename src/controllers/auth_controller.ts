@@ -12,7 +12,6 @@ const googleSignin = async (req: Request, res: Response) => {
         const ticket = await client.verifyIdToken({
             idToken: req.body.credential,
             audience: process.env.GOOGLE_CLIENT_ID,
-            maxExpiry: 60 * 60 * 24, // Token should be valid for 24 hours max
         });
         const payload = ticket.getPayload();
 
@@ -36,12 +35,15 @@ const googleSignin = async (req: Request, res: Response) => {
                 _id: donor._id,
                 ...tokens,
             });
+            console.log("Google sign-in successful");
+        } else {
+            throw new Error("Email not found in token payload");
         }
     } catch (err) {
-        console.log("google err", err);
+        console.log("Google sign-in error:", err);
         return res.status(400).send(err.message);
     }
-}
+};
 
 const generateTokens = async (donor: Document & IDonor) => {
     const accessToken = jwt.sign({ _id: donor._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION });
