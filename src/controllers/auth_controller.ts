@@ -202,11 +202,42 @@ const refresh = async (req: Request, res: Response) => {
     });
 }
 
+
+const newPassword = async (req: Request, res: Response) => {
+    const {email, password} = req.body;
+    if (!email || !password) {
+        return res.status(400).send("missing email or password");
+    }
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const encryptedPassword = await bcrypt.hash(password, salt);
+        const donor = await Donor.findOneAndUpdate(
+            { email: email }, 
+            { password: encryptedPassword},
+            { new: true, useFindAndModify: false }
+        );
+        const tokens = await generateTokens(donor);
+        return res.status(200).send({
+            firstName: donor.firstName,
+            lastName: donor.lastName,
+            email: donor.email,
+            phoneNumber: donor.phoneNumber,
+            mainAddress: donor.mainAddress,
+            _id: donor._id,
+            ...tokens
+        });
+    } catch (err) {
+        console.log("newPassword err",err);
+        return res.status(400).send(err);
+    }
+};
+
 export default {
     googleSignin,
     register,
     login,
     logout,
     refresh,
-    generateTokens
+    generateTokens,
+    newPassword
 }
