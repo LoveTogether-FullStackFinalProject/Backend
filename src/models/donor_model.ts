@@ -1,5 +1,5 @@
 import mongoose, { Schema, model, Document } from "mongoose";
-import { IDonation } from './donation_model';
+import { IDonation } from './donationModal';
 
 export interface IDonor extends Document {
     firstName: string;
