@@ -280,50 +280,9 @@ router.get("/logout", authController.logout);
 
 router.get("/refreshToken", authController.refresh);
 
-/**
-* @swagger
-* /auth/newPassword:
-*   post:
-*     summary: new password for a donor
-*     tags: [Auth]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Donor'
-*     responses:
-*       200:
-*         description: Successfully logged in
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Tokens'
-*       400:
-*         description: Bad Request
-*         content:
-*           application/json:
-*             schema:
-*               type: object
-*               properties:
-*                 message: 
-*                   type: string
-*               example:
-*                 message: "Invalid input data"
-*       401:
-*         description: Unauthorized
-*         content:
-*           application/json:
-*             schema:
-*               type: object
-*               properties:
-*                 message: 
-*                   type: string
-*               example:
-*                 message: "Unauthorized access"
-*/
 
-router.post("/newPassword", authController.newPassword);
+
+// router.post("/newPassword", authController.newPassword);
 
 export default router;
 
