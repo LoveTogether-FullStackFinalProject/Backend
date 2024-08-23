@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
 import { Document } from 'mongoose';
+import Donation from '../models/donationModal'
 
 const client = new OAuth2Client();
 
@@ -232,6 +233,19 @@ const newPassword = async (req: Request, res: Response) => {
     }
 };
 
+
+const uploadDonation = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { donor, itemName, quantity, category, condition } = req.body;
+      const donation = await Donation.create(req.body);
+      res.status(201).send(donation);
+    } catch (error) {
+      console.error('Error uploading donation:', error);
+      res.status(500).send({ message: 'Error uploading donation' });
+    }
+  };
+
+
 export default {
     googleSignin,
     register,
@@ -239,5 +253,6 @@ export default {
     logout,
     refresh,
     generateTokens,
-    newPassword
+    newPassword,
+    uploadDonation
 }
