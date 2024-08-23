@@ -234,18 +234,6 @@ const newPassword = async (req: Request, res: Response) => {
 };
 
 
-const uploadDonation = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { donor, itemName, quantity, category, condition } = req.body;
-      const donation = await Donation.create(req.body);
-      res.status(201).send(donation);
-    } catch (error) {
-      console.error('Error uploading donation:', error);
-      res.status(500).send({ message: 'Error uploading donation' });
-    }
-  };
-
-
 export default {
     googleSignin,
     register,
@@ -254,5 +242,4 @@ export default {
     refresh,
     generateTokens,
     newPassword,
-    uploadDonation
 }
