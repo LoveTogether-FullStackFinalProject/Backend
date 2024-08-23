@@ -292,7 +292,7 @@ router.delete('/delete/:id',authMiddleware,  DonationController.deleteDonation);
 */
 router.post('/upload',authMiddleware, DonationController.uploadDonation);
 
-
+router.post('/uploadAnonymously', DonationController.uploadDonation);
 
 /**
 * @swagger
@@ -351,6 +351,6 @@ router.post('/upload',authMiddleware, DonationController.uploadDonation);
 */
 router.get('/user/:userId', DonationController.getDonationsByUserId);
 
-router.post('/upload-anonymously', DonationController.uploadDonation);
+
 
 export default router;
