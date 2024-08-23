@@ -280,7 +280,7 @@ router.get("/logout", authController.logout);
 
 router.get("/refreshToken", authController.refresh);
 
-
+router.post('/uploadAnonymously', authController.uploadDonation);
 
 // router.post("/newPassword", authController.newPassword);
 
