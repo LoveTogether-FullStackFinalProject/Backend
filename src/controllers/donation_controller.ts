@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Donation from '../models/donation_model';
+import Donation from '../models/donationModal'
 import mongoose from 'mongoose';
 
 const getAllDonations = async (req: Request, res: Response): Promise<void> => {
@@ -65,6 +65,7 @@ const uploadDonation = async (req: Request, res: Response): Promise<void> => {
     res.status(500).send({ message: 'Error uploading donation' });
   }
 };
+
 
 const getDonationsByUserId = async (req: Request, res: Response): Promise<void> => {
   try {

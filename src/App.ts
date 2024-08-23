@@ -58,7 +58,8 @@ const initApp = (): Promise<Express> => {
                 version: "1.0.1",
                 description: "Full Stack Project 2024",
               },
-              servers: [{ url: "http://localhost:3000" }],
+              //servers: [{ url: "http://localhost:3000" }],
+              servers: [{ url: "https://ve-be.cs.colman.ac.il" }],
             },
             apis: ["./src/routes/*.ts"],
           };
@@ -66,7 +67,7 @@ const initApp = (): Promise<Express> => {
           app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
           app.use(cors({
-            origin: 'http://localhost:5173',
+            origin: ['http://localhost:5173', 'https://ve-be.cs.colman.ac.il'], 
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
           }));
@@ -77,8 +78,11 @@ const initApp = (): Promise<Express> => {
           app.use("/donor", DonorRoute);
           app.use('/photos', FileRoute); 
           app.use("/requestedDonation", requestedDonationRoute);
-
-          app.use('/public', express.static('public'));
+          app.use("/public", express.static("public"));
+          app.use(express.static('dist/client'))
+          app.get('*',function (req, res) {
+            res.sendfile('dist/client/index.html');
+          });
           
           resolve(app);
         })

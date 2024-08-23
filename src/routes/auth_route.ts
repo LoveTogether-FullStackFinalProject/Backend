@@ -280,5 +280,8 @@ router.get("/logout", authController.logout);
 
 router.get("/refreshToken", authController.refresh);
 
+
+// router.post("/newPassword", authController.newPassword);
+
 export default router;
 

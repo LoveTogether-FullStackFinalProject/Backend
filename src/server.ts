@@ -1,32 +1,3 @@
-// import env from "dotenv";
-// console.log(process.env.NODE_ENV);
-// env.config();
-
-// console.log(process.env.DB_URL);
-// import initApp from "./app";
-// import swaggerUI from "swagger-ui-express";
-// import swaggerJsDoc from "swagger-jsdoc";
-// import http from 'http';
-// import https from 'https';
-// import fs from 'fs';
-// import path from "path";
-
-
-// initApp().then((app) => {
-//   console.log('Server started')
-//   if (process.env.NODE_ENV !== 'production') {
-//     console.log('development');
-//     http.createServer(app).listen(process.env.PORT);
-//   } else {
-//     console.log('PRODUCTION');
-//     const options2 = {
-//       key: fs.readFileSync('../client-key.pem'),
-//       cert: fs.readFileSync('../client-cert.pem')
-//     };
-//     https.createServer(options2, app).listen(process.env.HTTPS_PORT);
-//   }
-// });
-
 
 import env from "dotenv";
 console.log(process.env.NODE_ENV);
@@ -57,7 +28,7 @@ initApp().then((app) => {
         description: "Full Stack Project 2024",
       },
       //servers: [{ url: "http://localhost:3000", },],
-      servers: [{ url: "https://node12.cs.colman.ac.il/", },],
+      servers: [{ url: "https://ve-be.cs.colman.ac.il", },],
     },
     apis: ["./src/routes/*.ts"],
   };
@@ -71,8 +42,8 @@ initApp().then((app) => {
   }
   else {
   console.log('PRODUCTION');
-  const keyPath = path.join(__dirname, '../../client-key.pem');
-  const certPath = path.join(__dirname, '../../client-cert.pem');
+  const keyPath = path.join(__dirname, '../../myserver.key');
+  const certPath = path.join(__dirname, '../../CSB.crt');
 
   console.log('Key Path:', keyPath);
   console.log('Cert Path:', certPath);

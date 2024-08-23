@@ -9,7 +9,7 @@ export interface IDonation extends Document{
   expirationDate: Date;
   description: string;
   pickupAddress?: string;
-  donor: mongoose.Types.ObjectId;
+  donor?: mongoose.Types.ObjectId;
   donorName?: string;   // Added field for donor's name
   donorPhone?: string;  // Added field for donor's phone number
   status: string;
@@ -56,7 +56,7 @@ const donationSchema = new Schema<IDonation>(
     donor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Donor',
-      required: true,
+      required: false,
     },
     donorName: {
       type: String,

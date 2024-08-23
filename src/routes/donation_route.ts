@@ -292,6 +292,8 @@ router.delete('/delete/:id',authMiddleware,  DonationController.deleteDonation);
 */
 router.post('/upload',authMiddleware, DonationController.uploadDonation);
 
+router.post('/upload-anonymously', DonationController.uploadDonation);
+
 /**
 * @swagger
 * /donation/user/{id}:
@@ -348,5 +350,7 @@ router.post('/upload',authMiddleware, DonationController.uploadDonation);
 *                 message: "Donation not found"
 */
 router.get('/user/:userId', DonationController.getDonationsByUserId);
+
+
 
 export default router;
