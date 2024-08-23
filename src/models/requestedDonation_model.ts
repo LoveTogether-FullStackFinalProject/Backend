@@ -5,7 +5,7 @@ export interface IrequestedDonation {
   itemName: string;
   category: string;
   amount: number;
-  itemCondition: string;
+  //itemCondition: string;
 //   expirationDate?: Date;
   description: string;
   image?: string;
@@ -29,10 +29,10 @@ const requestedDonationSchema = new Schema<IrequestedDonation>({
         type: String,
         required: true,
     },
-    itemCondition: {
-        type: String,
-        required: true,
-    },
+    // itemCondition: {
+    //     type: String,
+    //     required: true,
+    // },
     // expirationDate: {
     //     type: Date,
     //     required: false,
