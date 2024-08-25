@@ -196,7 +196,7 @@ const upload = multer({ storage: storage });
  *         description: No file uploaded
  */
 
-router.post('/upload', upload.single('file'), function (req, res) { 
+    router.post('/upload', upload.single('file'), function (req, res) { 
     if (req.file) {
         // Construct the URL for the uploaded file with hardcoded base URL
         const fileUrl = `https://ve-be.cs.colman.ac.il/public/${req.file.filename}`;
@@ -205,6 +205,6 @@ router.post('/upload', upload.single('file'), function (req, res) {
     } else {
         res.status(400).send('No file uploaded');
     }
-});
+    });
 
 export default router;
