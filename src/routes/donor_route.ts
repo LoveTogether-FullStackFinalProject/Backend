@@ -119,38 +119,6 @@ router.put('/:id',authMiddleware,  DonorController.putById);
 router.delete('/:id',authMiddleware, DonorController.deleteById);
 
 
-/**
- * @swagger
- * /donor/{id}/password:
- *   put:
- *     summary: Update a donor password by ID
- *     tags: [Donor]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               password:
- *                 type: string
- *     responses:
- *       200:
- *         description: Updated donor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Donor'
- *       404:
- *         description: Donor not found
- */
-router.put('/:id/password',authMiddleware, DonorController.putPasswordById);
 
 export default router;
 
