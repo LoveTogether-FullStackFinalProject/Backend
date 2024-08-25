@@ -292,6 +292,41 @@ router.delete('/delete/:id',authMiddleware,  DonationController.deleteDonation);
 */
 router.post('/upload',authMiddleware, DonationController.uploadDonation);
 
+
+
+/**
+* @swagger
+* /donation/upload-anonymously:
+*   post:
+*     summary: Create a new donation
+*     tags: [Donation]
+*     security:
+*       - bearerAuth: []
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/Donation'
+*     responses:
+*       201:
+*         description: Requested created
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Donation'
+*       500:
+*         description: Server error
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 message: 
+*                   type: string
+*               example:
+*                 message: "Server error"
+*/
 router.post('/upload-anonymously', DonationController.uploadDonation);
 
 /**
