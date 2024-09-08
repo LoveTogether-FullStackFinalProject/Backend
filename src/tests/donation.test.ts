@@ -159,16 +159,16 @@ describe('Donation tests', () => {
     expect(response.body.quantity).toBe(updatedDonation.quantity);
   });
 
-  test("Test PUT with wrong id /post/:id", async () => {
-    const updatedPost = { ...newDonation, quantity: 40 };
+  test("Test PUT with wrong id /dination/:id", async () => {
+    const updatedDonation = { ...newDonation, quantity: 40 };
     const response = await request(app)
       .put("/donation/update/" + "123")
       .set("Authorization", "JWT " + accessToken)
-      .send(updatedPost);
+      .send(updatedDonation);
     expect(response.statusCode).toBe(500);
   });
 
-  test("Test DELETE with wrong id /post/:id", async () => {
+  test("Test DELETE with wrong id /donation/:id", async () => {
     const response = await request(app).delete(`/donation/delete/"123"`).set("Authorization", "JWT " + accessToken);
     expect(response.statusCode).toBe(500);
   });
