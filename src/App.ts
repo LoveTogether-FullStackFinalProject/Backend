@@ -1,14 +1,6 @@
 import env from "dotenv";
 
 
-if (process.env.NODE_ENV === "production") {
-  env.config({ path: ".env.prod" });
-} else if (process.env.NODE_ENV === "test") {
-  env.config({ path: ".env.test" });
-} else {
-  env.config({ path: ".env" });
-}
-
 
 import express, { Express } from "express";
 import mongoose from "mongoose";
@@ -24,12 +16,24 @@ import swaggerJsDoc from "swagger-jsdoc";
 import cors from "cors";
 env.config();  
 
-
+if(process.env.NODE_ENV === "test") {
+  process.env.DB_URL="mongodb://localhost:27017/vehahavtem";
+  env.config({ path: ".env.test" });
+ }
+ else if (process.env.NODE_ENV === "production") {
+  env.config({ path: ".env.prod" });
+} else {
+  env.config({ path: ".env" });
+}
 
 
 
 const initApp = (): Promise<Express> => {
- 
+
+
+
+ console.log("process.env.NODE_ENV:", process.env.NODE_ENV);
+ console.log("process.env.DB_URL:", process.env.DB_URL);
   const promise = new Promise<Express>((resolve, reject) => {
     try {
       const db = mongoose.connection;
