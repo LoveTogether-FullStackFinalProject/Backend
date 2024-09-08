@@ -54,7 +54,7 @@ const generateTokens = async (donor: Document & IDonor) => {
     } else {
         donor.refreshTokens.push(refreshToken);
     }
-    console.log("donor.refreshTokens in generateTokens:",donor.refreshTokens);
+    // console.log("donor.refreshTokens in generateTokens:",donor.refreshTokens);
     await donor.save();
     return {
         'accessToken': accessToken,
