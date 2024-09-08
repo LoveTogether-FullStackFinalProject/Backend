@@ -123,7 +123,8 @@ describe("Auth tests", () => {
 });
 
   test("Test forbidden access without token", async () => {
-    const response = await request(app).get(`/donor/${donor_id}`);
+    const updatedDonor = {...donor, firstName: "Jane"};
+    const response = await request(app).put(`/donor/${donor_id}`).send(updatedDonor);
     expect(response.statusCode).toBe(401);
   });
 
@@ -135,9 +136,10 @@ describe("Auth tests", () => {
   });
 
   test("Test access with invalid token", async () => {
+    const updatedDonor = {...donor, firstName: "Jane"};
     const response = await request(app)
-     .get(`/donor/${donor_id}`)
-      .set("Authorization", "JWT 1" + accessToken);
+     .put(`/donor/${donor_id}`)
+      .set("Authorization", "JWT 1" + accessToken).send(updatedDonor);
     expect(response.statusCode).toBe(401);
   });
 
@@ -145,10 +147,10 @@ describe("Auth tests", () => {
 
   test("Test access after timeout of token", async () => {
     await new Promise(resolve => setTimeout(() => resolve("done"), 5000));
-
+    const updatedDonor = {...donor, firstName: "Jane"};
     const response = await request(app)
-      .get(`/donor/${donor_id}`)
-      .set("Authorization", "JWT " + accessToken);
+      .put(`/donor/${donor_id}`)
+      .set("Authorization", "JWT " + accessToken).send(updatedDonor);
     expect(response.statusCode).not.toBe(200);
     console.log("response.statusCode of timeout: " +response.statusCode);
   });
