@@ -1,5 +1,15 @@
 import env from "dotenv";
-env.config();
+
+
+if (process.env.NODE_ENV === "production") {
+  env.config({ path: ".env.prod" });
+} else if (process.env.NODE_ENV === "test") {
+  env.config({ path: ".env.test" });
+} else {
+  env.config({ path: ".env" });
+}
+
+
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -12,17 +22,15 @@ import requestedDonationRoute from "./routes/requestedDonation_route";
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import cors from "cors";
+env.config();  
 
-// Load environment variables conditionally
-if (process.env.NODE_ENV === "production") {
-  env.config({ path: ".env.prod" });
-} else {
-  env.config({ path: ".env" });
-}
+
+
+
 
 const initApp = (): Promise<Express> => {
+ 
   const promise = new Promise<Express>((resolve, reject) => {
-    // Add error handling and debug logging
     try {
       const db = mongoose.connection;
       db.once("open", () => console.log("Connected to Database"));
@@ -35,7 +43,7 @@ const initApp = (): Promise<Express> => {
       if (!url) {
         throw new Error("DB_URL is not defined in the environment variables");
       }
-      
+
       mongoose.connect(url)
         .then(() => {
           const app = express();
@@ -58,7 +66,6 @@ const initApp = (): Promise<Express> => {
                 version: "1.0.1",
                 description: "Full Stack Project 2024",
               },
-              //servers: [{ url: "http://localhost:3000" }],
               servers: [{ url: "https://ve-be.cs.colman.ac.il" }],
             },
             apis: ["./src/routes/*.ts"],
@@ -83,7 +90,7 @@ const initApp = (): Promise<Express> => {
           app.get('*',function (req, res) {
             res.sendfile('dist/client/index.html');
           });
-          
+
           resolve(app);
         })
         .catch(error => {
@@ -99,4 +106,4 @@ const initApp = (): Promise<Express> => {
   return promise;
 };
 
-export default initApp;
+export default initApp;
