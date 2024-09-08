@@ -5,7 +5,7 @@ import env from "dotenv";
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import AdminRoute from "./routes/admin_route";
+//import AdminRoute from "./routes/admin_route";
 import AuthRoute from "./routes/auth_route";
 import DonationRoute from "./routes/donation_route";
 import DonorRoute from "./routes/donor_route";
@@ -83,7 +83,7 @@ const initApp = (): Promise<Express> => {
             allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
           }));
 
-          app.use("/admin", AdminRoute);
+          //app.use("/admin", AdminRoute);
           app.use("/auth", AuthRoute);
           app.use("/donation", DonationRoute);
           app.use("/donor", DonorRoute);
