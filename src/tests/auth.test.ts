@@ -155,7 +155,6 @@ describe("Auth tests", () => {
     console.log("response.statusCode of timeout: " +response.statusCode);
   });
 
- 
   test("Test refresh token", async () => {
     console.log("Test refresh token: " + refreshToken);
     const response = await request(app)
