@@ -122,6 +122,12 @@ describe('Requested Donation tests', () => {
     expect(response.body.amount).toBe(newRequestedDonation.amount);
   });
 
+  test('Test get donation by wrong id', async () => {
+    const response = await request(app)
+      .get(`/requestedDonation/rdonation/${"1"}`)
+    expect(response.statusCode).toBe(500);
+  });
+
   test('Test PUT /rdonations/:id', async () => {
     const updatedrDonation = { ...newRequestedDonation, amount: 30 };
     const response = await request(app)
