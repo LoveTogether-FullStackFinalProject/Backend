@@ -103,6 +103,12 @@ describe("Donor tests", () => {
     expect(response.body.mainAddress).toBe(newDonor.mainAddress);
   });
 
+  test("Test get donor by wrong id", async () => {
+    const response = await request(app)
+      .get("/donor/" + "1");
+    expect(response.statusCode).toBe(500);
+  });
+
   test("Test PUT /donor/:id", async () => {
     const updatedDonor = { ...newDonor, firstName: "Updated" };
     const response = await request(app)
@@ -111,6 +117,22 @@ describe("Donor tests", () => {
       .send(updatedDonor);
     expect(response.statusCode).toBe(200);
     expect(response.body.firstName).toBe(updatedDonor.firstName);
+  });
+
+  test("Test PUT /donor/:id with wrong id", async () => {
+    const updatedDonor = { ...newDonor, firstName: "Updated" };
+    const response = await request(app)
+      .put("/donor/" + "1")
+      .set("Authorization", "Bearer " + accessToken)
+      .send(updatedDonor);
+    expect(response.statusCode).toBe(500);
+  });
+
+  test("Test DELETE /donor/:id wrong id", async () => {
+    const response = await request(app)
+      .delete(`/donor/${"1"}`)
+      .set("Authorization", "Bearer " + accessToken);
+    expect(response.statusCode).toBe(500);
   });
 
   test("Test DELETE /donor/:id", async () => {

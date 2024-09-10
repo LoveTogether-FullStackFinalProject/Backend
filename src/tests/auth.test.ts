@@ -37,6 +37,12 @@ let donor_id: string;
 
 describe("Auth tests", () => {
 
+  test("Test Google", async () => {
+    const response = await request(app)
+      .post("/auth/googleSignIn");
+    expect(response.statusCode).toBe(400);
+  });
+
   test("Test Register", async () => {
     const response = await request(app)
       .post("/auth/register")
@@ -78,7 +84,7 @@ describe("Auth tests", () => {
   test("Test Login with Incorrect Credentials", async () => {
     const response = await request(app)
       .post("/auth/login")
-      .send({ email: "test@test.com", password: "wrong_password" });
+      .send({ email: "testUser@test.com", password: "wrong_password" });
     expect(response.statusCode).toBe(401);
   });
 
@@ -94,7 +100,7 @@ describe("Auth tests", () => {
   test("Test Login without password", async () => {
     const response = await request(app)
       .post("/auth/login").send({
-        email: "test@test.com",});
+        email: "testUser@test.com",});
     expect(response.statusCode).toBe(400);
 
   });
@@ -154,6 +160,27 @@ describe("Auth tests", () => {
     expect(response.statusCode).not.toBe(200);
     console.log("response.statusCode of timeout: " +response.statusCode);
   });
+
+  test("Test refresh token without token", async () => {
+    console.log("Test refresh token: " + refreshToken);
+    const response = await request(app)
+      .get("/auth/refreshToken")
+      .set("Authorization", "JWT")
+      .send();
+    expect(response.statusCode).toBe(401);
+
+  });
+
+  test("Test refresh token with wrong token", async () => {
+    console.log("Test refresh token: " + refreshToken);
+    const response = await request(app)
+      .get("/auth/refreshToken")
+      .set("Authorization", "JWT" + "wrong_token")
+      .send();
+    expect(response.statusCode).toBe(401);
+
+  });
+
 
   test("Test refresh token", async () => {
     console.log("Test refresh token: " + refreshToken);

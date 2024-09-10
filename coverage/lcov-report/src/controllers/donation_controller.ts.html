@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">84.37% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>40/64</span>
+                <span class='fraction'>54/64</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>10/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.34% </span>
+                <span class="strong">82.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/58</span>
+                <span class='fraction'>48/58</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -177,16 +177,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,26 +233,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,7 +286,7 @@ const getDonationById = async (req: Request, res: Response): Promise&lt;void&gt;
         }
         res.status(200).json(donation);
     } catch (err) {
-<span class="cstat-no" title="statement not covered" >        res.status(500).send('Internal Server Error -&gt; getDonationById');</span>
+        res.status(500).send('Internal Server Error -&gt; getDonationById');
     }
 };
 &nbsp;
@@ -332,27 +332,27 @@ const uploadDonation = async (req: Request, res: Response): Promise&lt;void&gt; 
 };
 &nbsp;
 &nbsp;
-const getDonationsByUserId = <span class="fstat-no" title="function not covered" >async (r</span>eq: Request, res: Response): Promise&lt;void&gt; =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-      const { userId } = <span class="cstat-no" title="statement not covered" >req.params;</span>
-<span class="cstat-no" title="statement not covered" >      console.log(`Fetching donations for userId: ${userId}`); </span>// Verify userId
+const getDonationsByUserId = async (req: Request, res: Response): Promise&lt;void&gt; =&gt; {
+  try {
+      const { userId } = req.params;
+      console.log(`Fetching donations for userId: ${userId}`); // Verify userId
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (!userId) {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!userId) {
 <span class="cstat-no" title="statement not covered" >          res.status(400).send('User ID is required');</span>
 <span class="cstat-no" title="statement not covered" >          return;</span>
       }
 &nbsp;
-      const donations = <span class="cstat-no" title="statement not covered" >await Donation.find({ donor: new mongoose.Types.ObjectId(userId) }).populate('donor');</span>
+      const donations = await Donation.find({ donor: new mongoose.Types.ObjectId(userId) }).populate('donor');
       
-<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (donations.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >          console.log('No donations found for this user');</span>
-<span class="cstat-no" title="statement not covered" >          res.status(404).send('No donations found for this user');</span>
-<span class="cstat-no" title="statement not covered" >          return;</span>
+      if (donations.length === 0) {
+          console.log('No donations found for this user');
+          res.status(404).send('No donations found for this user');
+          return;
       }
-<span class="cstat-no" title="statement not covered" >      res.status(200).send(donations);</span>
+      res.status(200).send(donations);
   } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.error('Error fetching donations for user:', error);</span>
-<span class="cstat-no" title="statement not covered" >      res.status(500).send({ message: 'Error fetching donations for user' });</span>
+      console.error('Error fetching donations for user:', error);
+      res.status(500).send({ message: 'Error fetching donations for user' });
   }
 };
 &nbsp;
@@ -370,7 +370,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-09-08T17:49:17.819Z
+                at 2024-09-10T17:06:51.538Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

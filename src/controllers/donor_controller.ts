@@ -47,18 +47,18 @@ class DonorController {
     }
   }
 
-  async putPasswordById(req: Request, res: Response) {
-    try {
-      const donor = await DonorModel.findByIdAndUpdate
-      (req.params.id, {password: req.body.password}, { new: true });
+  // async putPasswordById(req: Request, res: Response) {
+  //   try {
+  //     const donor = await DonorModel.findByIdAndUpdate
+  //     (req.params.id, {password: req.body.password}, { new: true });
 
-      if (!donor) {
-        return res.status(404).json({ message: 'Donor not found' });
-      }
-      res.status(200).json(donor);
-    } catch (error) {
-    }
-  }
+  //     if (!donor) {
+  //       return res.status(404).json({ message: 'Donor not found' });
+  //     }
+  //     res.status(200).json(donor);
+  //   } catch (error) {
+  //   }
+  // }
 
   async deleteById(req: Request, res: Response) {
     try {

@@ -111,6 +111,13 @@ describe('Donation tests', () => {
     expect(response.body).toStrictEqual([]);
   });
 
+  test('Test get donation by User id', async () => {
+    const response = await request(app)
+      .get(`/donation/user/${DonorId}`)
+    expect(response.statusCode).toBe(404);
+  });
+
+
   test('Test Post Donation', async () => {
     donationId = await addDonation(donation);
     expect(donationId).toBeDefined(); 
@@ -132,7 +139,7 @@ describe('Donation tests', () => {
     expect(donationData.donor._id).toBe(donation.donor);
   });
 
-  test('Test  new Post Donation', async () => {
+  test('Test new Post Donation', async () => {
     createdDonationId = await addDonation(newDonation);
     expect(createdDonationId).toBeDefined(); 
   });
@@ -149,6 +156,26 @@ describe('Donation tests', () => {
     expect(response.body.pickupAddress).toBe(newDonation.pickupAddress);
     expect(response.body.status).toBe(newDonation.status);
     expect(response.body.donor._id).toBe(newDonation.donor);
+  });
+
+  
+  test('Test get donation by wrong id', async () => {
+    const response = await request(app)
+      .get(`/donation/donation/${1}`)
+    expect(response.statusCode).toBe(500);
+  });
+
+  test('Test get donation by User id', async () => {
+    const response = await request(app)
+      .get(`/donation/user/${DonorId}`)
+    expect(response.statusCode).toBe(200);
+    expect(response.body.length).toBe(2);
+  });
+
+  test('Test get donation by wrong User id', async () => {
+    const response = await request(app)
+      .get(`/donation/user/${1}`)
+    expect(response.statusCode).toBe(500);
   });
 
   test('Test PUT /donations/:id', async () => {
