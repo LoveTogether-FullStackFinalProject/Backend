@@ -69,18 +69,31 @@ interface IDonor {
     image: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
   };
 
+// beforeAll(async () => {
+//     app = await initApp();
+//     console.log("beforeAll");
+//     await DonationModel.deleteMany();
+//     await request(app).post("/auth/register").send(donor);
+//     const response = await request(app).post("/auth/login").send(donor);
+//     DonorId= response.body._id;
+//     console.log('DonorId:', DonorId);
+//     donation.donor = DonorId;
+//     newDonation.donor = DonorId;
+//     accessToken = response.body.accessToken;
+// });
+
 beforeAll(async () => {
-    app = await initApp();
-    console.log("beforeAll");
-    await DonationModel.deleteMany();
-    await request(app).post("/auth/register").send(donor);
-    const response = await request(app).post("/auth/login").send(donor);
-    DonorId= response.body._id;
-    console.log('DonorId:', DonorId);
-    donation.donor = DonorId;
-    newDonation.donor = DonorId;
-    accessToken = response.body.accessToken;
-});
+  app = await initApp();
+  console.log("beforeAll");
+  await DonationModel.deleteMany();
+  await request(app).post("/auth/register").send(donor);
+  const response = await request(app).post("/auth/login").send(donor);
+  DonorId = response.body._id;
+  console.log('DonorId:', DonorId);
+  donation.donor = DonorId;
+  newDonation.donor = DonorId;
+  accessToken = response.body.accessToken;
+}, 30000);
 
 afterAll(async () => {
   await mongoose.connection.close();
