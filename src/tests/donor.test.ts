@@ -37,7 +37,6 @@ const newDonor: IDonor = {
   mainAddress: "456 New Street",
   isAdmin: false,
 };
-
 let DonorId: string;
 
 beforeAll(async () => {

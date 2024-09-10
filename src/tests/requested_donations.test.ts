@@ -8,7 +8,6 @@ import e, { Express } from 'express';
 let app: Express;
 let accessToken: string;
 
-
  interface IRequestedDonation {
     itemName: string;
     category: string;
