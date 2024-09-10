@@ -83,9 +83,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-    await mongoose.connection.close();
-});
- 
+  await mongoose.connection.close();
+}, 30000);
 
 let donationId: string;
 let createdDonationId: string;
