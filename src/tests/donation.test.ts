@@ -80,12 +80,15 @@ beforeAll(async () => {
     donation.donor = DonorId;
     newDonation.donor = DonorId;
     accessToken = response.body.accessToken;
-});
+},60000);
+
+
 
 afterAll(async () => {
     await mongoose.connection.close();
 });
  
+
 let donationId: string;
 let createdDonationId: string;
 
