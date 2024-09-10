@@ -80,7 +80,7 @@ beforeAll(async () => {
     donation.donor = DonorId;
     newDonation.donor = DonorId;
     accessToken = response.body.accessToken;
-},60000);
+});
 
 
 
