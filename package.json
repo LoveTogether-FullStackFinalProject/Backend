@@ -10,7 +10,6 @@
     "testAuth": "tsc && cross-env NODE_ENV=test DOTENV_CONFIG_PATH='./.env.test' jest --detectOpenHandles --forceExit --runInBand ./src/tests/auth.test.ts",
     "testDonation": "tsc && cross-env NODE_ENV=test DOTENV_CONFIG_PATH='./.env.test' jest --detectOpenHandles --forceExit --runInBand ./src/tests/donation.test.ts",
     "testRequestedDonation": "tsc && cross-env NODE_ENV=test DOTENV_CONFIG_PATH='./.env.test' jest --detectOpenHandles --forceExit --runInBand ./src/tests/requested_donations.test.ts",
-    "testAdmin": "tsc && cross-env NODE_ENV=test DOTENV_CONFIG_PATH='./.env.test' jest --detectOpenHandles --forceExit --runInBand ./src/tests/admin.test.ts",
     "testDonor": "tsc && cross-env NODE_ENV=test DOTENV_CONFIG_PATH='./.env.test' jest --detectOpenHandles --forceExit --runInBand ./src/tests/donor.test.ts",
     "testFile": "tsc && cross-env NODE_ENV=test DOTENV_CONFIG_PATH='./.env.test' jest --detectOpenHandles --forceExit --runInBand ./src/tests/file.test.ts",
     "prod": "tsc -p tsconfig.json && cross-env NODE_ENV=production DOTENV_CONFIG_PATH=./.env.prod pm2 start ./dist/src/server.js"
