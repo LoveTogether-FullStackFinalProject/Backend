@@ -177,6 +177,7 @@ describe('Donation tests', () => {
       .get(`/donation/user/${1}`)
     expect(response.statusCode).toBe(500);
   });
+  
 
   test('Test PUT /donations/:id', async () => {
     const updatedDonation = { ...newDonation, quantity: 30 };
