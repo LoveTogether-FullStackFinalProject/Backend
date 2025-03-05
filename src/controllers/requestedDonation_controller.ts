@@ -18,7 +18,7 @@ const getAllrequestedDonations = async (
     req: Request,
     res: Response
     ): Promise<void> => {
-    try {
+    try { 
         const { id } = req.params;
         const rdonation = await requestedDonation.findById(id);
         if (!rdonation) {
